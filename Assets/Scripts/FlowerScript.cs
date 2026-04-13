@@ -1,15 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class FlowerScript : MonoBehaviour
 {
+    // Lists for the flower petals, thier starting location for resetting them, and the flower order to track which order they were pressed
     public List<GameObject> flowerPetals;
     public List<Vector3> flowerPetalStartingLocation;
     public List<int> FlowerOrder;
 
+    //A bool to see if all petals are gone (to provide an answer)
+    public bool answerProvided;
+
+    //Tracking the mouse position
     public Vector2 mousePos;
+
+    //The canvas tracker for playtesting
+    public TextMeshProUGUI testingResponse;
+
+
     void Start()
     {
         //gets the starting positions of the petals
@@ -55,15 +66,18 @@ public class FlowerScript : MonoBehaviour
         }
 
         //Combination is E, S, NE, W, N, ES, WN, SW
-        if (FlowerOrder.Count == flowerPetals.Count)
+        if (FlowerOrder.Count == flowerPetals.Count && answerProvided == false)
         {
+            answerProvided = true;
             if (FlowerOrder[0] == 2 && FlowerOrder[1] == 4 && FlowerOrder[2] == 1 && FlowerOrder[3] == 6 && FlowerOrder[4] == 0 && FlowerOrder[5] == 3 && FlowerOrder[6] == 7 && FlowerOrder[7] == 5)
             {
                 Debug.Log("You Solved the Puzzle!");
+                testingResponse.text = "Answer is Correct :)!";
             }
             else
             {
                 Debug.Log("Incorrect");
+                testingResponse.text = "Answer is Incorrect :(";
             }
         }
 
@@ -85,6 +99,8 @@ public class FlowerScript : MonoBehaviour
         {
             flowerPetals[i].transform.position = flowerPetalStartingLocation[i];
             FlowerOrder.Clear();
+            testingResponse.text = "Waiting for Answer";
+            answerProvided = false;
         }
     }
 }
