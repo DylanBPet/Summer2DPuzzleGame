@@ -58,7 +58,9 @@ public class FlowerScript : MonoBehaviour
                 int i = flowerPetals.IndexOf(hit.collider.gameObject);
                 if (i != -1)
                 {
-                     StartCoroutine(PetalStartFalling(i));
+                    BoxCollider2D bc = flowerPetals[i].GetComponent<BoxCollider2D>();
+                    bc.enabled = false;
+                    StartCoroutine(PetalStartFalling(i));
                     Debug.Log("Petal " + i + " Has Been Clicked");
                     FlowerOrder.Add(i);
                 }
@@ -101,6 +103,8 @@ public class FlowerScript : MonoBehaviour
             FlowerOrder.Clear();
             testingResponse.text = "Waiting for Answer";
             answerProvided = false;
+            BoxCollider2D bc = flowerPetals[i].GetComponent<BoxCollider2D>();
+            bc.enabled = true;
         }
     }
 }

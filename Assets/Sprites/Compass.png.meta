@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 93ddcc6ad6d491c4dac1164ef34c6ff9
+guid: 29dbfdba699155a42a4e54601b463cef
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1964942694661226017
-    second: Compas_0
+      213: -908463431701484072
+    second: Compas 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Compas_0
+      name: Compas 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 502
-        height: 455
+        width: 460
+        height: 437
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fd108b8a70f1bb4e0800000000000000
-      internalID: -1964942694661226017
+      spriteID: 8dd2006725d7463f0800000000000000
+      internalID: -908463431701484072
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Compas_0: -1964942694661226017
+      Compas 1_0: -908463431701484072
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
