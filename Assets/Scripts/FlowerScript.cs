@@ -35,38 +35,6 @@ public class FlowerScript : MonoBehaviour
     {   
         mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
-        /*
-        for (int i = 0; i < flowerPetals.Count; i++)
-        {
-            
-            SpriteRenderer sr = flowerPetals[i].GetComponent<SpriteRenderer>();
-
-            if (sr.bounds.Contains(mousePos) && Mouse.current.leftButton.wasPressedThisFrame)
-            {
-                StartCoroutine(PetalStartFalling(i));
-                Debug.Log("Petal " + i + " Has Been Clicked");
-                FlowerOrder.Add(i);
-            }
-        }
-        */
-
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-            if (hit.collider != null)
-            {
-                int i = flowerPetals.IndexOf(hit.collider.gameObject);
-                if (i != -1)
-                {
-                    BoxCollider2D bc = flowerPetals[i].GetComponent<BoxCollider2D>();
-                    bc.enabled = false;
-                    StartCoroutine(PetalStartFalling(i));
-                    Debug.Log("Petal " + i + " Has Been Clicked");
-                    FlowerOrder.Add(i);
-                }
-            }
-        }
-
         //Combination is E, S, NE, W, N, ES, WN, SW
         if (FlowerOrder.Count == flowerPetals.Count && answerProvided == false)
         {
@@ -84,6 +52,29 @@ public class FlowerScript : MonoBehaviour
         }
 
            
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed == true)
+        {
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+                if (hit.collider != null)
+                {
+                    int i = flowerPetals.IndexOf(hit.collider.gameObject);
+                    if (i != -1)
+                    {
+                        BoxCollider2D bc = flowerPetals[i].GetComponent<BoxCollider2D>();
+                        bc.enabled = false;
+                        StartCoroutine(PetalStartFalling(i));
+                        Debug.Log("Petal " + i + " Has Been Clicked");
+                        FlowerOrder.Add(i);
+                    }
+                }
+            }
+        }
     }
 
     IEnumerator PetalStartFalling(int i)
@@ -106,5 +97,6 @@ public class FlowerScript : MonoBehaviour
             BoxCollider2D bc = flowerPetals[i].GetComponent<BoxCollider2D>();
             bc.enabled = true;
         }
+        StopAllCoroutines();
     }
 }
