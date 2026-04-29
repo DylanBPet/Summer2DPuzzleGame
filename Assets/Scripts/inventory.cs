@@ -7,24 +7,37 @@ public class Invintory : MonoBehaviour
 {
     public List<GameObject> InventoryItems;
 
-    public List<Sprite> InventorySprites;
-
     public List<GameObject> InventorySlots;
+
+    public List<Vector2> InvSlotsOrignialPositions;
 
     private Vector2 mousePos;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        for (int i = 0; i < InventorySlots.Count; i++)
+        {
+            InvSlotsOrignialPositions.Add(InventorySlots[i].transform.position);
+        }
     }
-
-    // Update is called once per frame
     void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+        for (int i = 0; i < InventorySlots.Count; i++)
+        {
+            SpriteRenderer InvSlotSr = InventorySlots[i].GetComponent<SpriteRenderer>();
+            if (InvSlotSr.bounds.Contains(mousePos) && Mouse.current.leftButton.isPressed)
+            {
+                InventorySlots[i].transform.position = mousePos;
+            }
+            else
+            {
+                InventorySlots[i].transform.position = InvSlotsOrignialPositions[i];
+            }
+        
     }
+}
 
     public void ItemCollectied(InputAction.CallbackContext context)
     {
@@ -40,10 +53,9 @@ public class Invintory : MonoBehaviour
                         SpriteRenderer InvSlotSr = InventorySlots[s].GetComponent<SpriteRenderer>();
                         if (InvSlotSr.sprite == null)
                         {
-                            InvSlotSr.sprite = InventorySprites[i];
+                            InvSlotSr.sprite = InvItemSr.sprite;
                             return;
                         }
-
                     }  
                 }
             }
