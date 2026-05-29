@@ -5116,6 +5116,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2019915734}
+        m_TargetAssemblyTypeName: SafePuzzle, Assembly-CSharp
+        m_MethodName: SafeOpen
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6c2ab1b8-8984-453a-af3d-a3c78ae1679a
     m_ActionName: 'Player/Attack[/Mouse/leftButton,/Keyboard/enter]'
   - m_PersistentCalls:
@@ -6805,7 +6817,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2019915734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6843,6 +6855,9 @@ MonoBehaviour:
   - {fileID: 529477105}
   - {fileID: 1934497970}
   - {fileID: 2049301062}
+  currentSafeCombination: 0000000000000000000000000000000000000000000000000000000000000000
+  safeAnswerCombination: 0000000002000000030000000100000007000000000000000600000002000000
+  unlockHandle: {fileID: 146618680}
 --- !u!4 &2019915735
 Transform:
   m_ObjectHideFlags: 0
@@ -6965,7 +6980,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2068971340
 Transform:
   m_ObjectHideFlags: 0

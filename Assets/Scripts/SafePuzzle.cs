@@ -9,7 +9,12 @@ public class SafePuzzle : MonoBehaviour
     public List<Sprite> PicSprites;
     public List<GameObject> SafeIconSlots;
 
+    public List<int> currentSafeCombination;
+    public List<int> safeAnswerCombination;
+
     private Vector2 mousePos;
+    public SpriteRenderer unlockHandle;
+
     void Start()
     {
         
@@ -54,11 +59,13 @@ public class SafePuzzle : MonoBehaviour
                 if (s == 3)
                 {
                     slotSprite.sprite = PicSprites[0];
+                    currentSafeCombination[i] = s;
                     return;
                 }
                 else
                 {
                     slotSprite.sprite = PicSprites[s + 1];
+                    currentSafeCombination[i] = s;
                     return;
                 }
             }
@@ -75,15 +82,37 @@ public class SafePuzzle : MonoBehaviour
                 if (s == 9)
                 {
                     slotSprite.sprite = NumSprites[0];
+                    currentSafeCombination[i] = s;
                     return;
                 }
                 else
                 {
                     slotSprite.sprite = NumSprites[s + 1];
+                    currentSafeCombination[i] = s;
                     return;
                 }
             }
         }
     }
+
+    public void SafeOpen(InputAction.CallbackContext context)
+    {
+        if (context.performed == true)
+        {
+            if (unlockHandle.bounds.Contains(mousePos))
+            {
+                for (int i = 0; i < currentSafeCombination.Count; i++)
+                {
+                    if (currentSafeCombination[i] != safeAnswerCombination[i])
+                    {
+                        Debug.Log("Answer Incorrect");
+                        return;
+                    }
+                }
+                Debug.Log("Answer Correct");
+            }
+        }
+    }
+
 
 }
