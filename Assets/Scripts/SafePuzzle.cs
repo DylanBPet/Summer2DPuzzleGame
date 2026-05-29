@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class SafePuzzle : MonoBehaviour
 {
@@ -13,8 +14,9 @@ public class SafePuzzle : MonoBehaviour
     public List<int> safeAnswerCombination;
 
     private Vector2 mousePos;
-    public SpriteRenderer unlockHandle;
+    public GameObject unlockHandle;
 
+    public Coroutine lockIsLockedCoroutine;
     void Start()
     {
         
@@ -99,13 +101,15 @@ public class SafePuzzle : MonoBehaviour
     {
         if (context.performed == true)
         {
-            if (unlockHandle.bounds.Contains(mousePos))
+            SpriteRenderer safeSR = unlockHandle.GetComponent<SpriteRenderer>();
+            if (safeSR.bounds.Contains(mousePos))
             {
                 for (int i = 0; i < currentSafeCombination.Count; i++)
                 {
                     if (currentSafeCombination[i] != safeAnswerCombination[i])
                     {
                         Debug.Log("Answer Incorrect");
+                        StartLockIsLockedCoroutine();
                         return;
                     }
                 }
@@ -114,5 +118,36 @@ public class SafePuzzle : MonoBehaviour
         }
     }
 
+    public void StartLockIsLockedCoroutine()
+    {
+        if (lockIsLockedCoroutine != null)
+        {
+            StopCoroutine(lockIsLockedCoroutine);
+        }
+        lockIsLockedCoroutine = StartCoroutine(LockIsLocked());
+    }
+
+    IEnumerator LockIsLocked()
+    {
+        unlockHandle.transform.rotation = Quaternion.identity;
+        float t = 0;
+        Vector3 newRotation;
+        newRotation = unlockHandle.transform.eulerAngles;
+        while (t < 0.3f)
+        {
+            t += Time.deltaTime;
+            newRotation.z -= 0.5f;
+            unlockHandle.transform.eulerAngles = newRotation;
+            yield return null;
+        }
+        t = 0;
+        while (t < 0.3f)
+        {
+            t += Time.deltaTime;
+            newRotation.z += 0.5f;
+            unlockHandle.transform.eulerAngles = newRotation;
+            yield return null;
+        }
+    }
 
 }
