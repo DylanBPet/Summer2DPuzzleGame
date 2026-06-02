@@ -197,4 +197,11 @@ public class LookingAround : MonoBehaviour
             yield return null;
         }
     }
+
+    public void zoomBackOutUIButton()
+    {
+        //StartCoroutine(DoFadeOut());
+        walls[wallListNumber].SetActive(true);
+    }
+
 }
