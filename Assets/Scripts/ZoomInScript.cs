@@ -4,6 +4,10 @@ using UnityEngine.InputSystem;
 
 public class ZoomInScript : MonoBehaviour
 {
+
+    //script for looking around
+    public LookingAround lookAroundScript;
+
     //the players mouse
     private Vector2 mousePos;
 
@@ -19,6 +23,14 @@ public class ZoomInScript : MonoBehaviour
     //the safe in zoomed out and zoomed in mode
     public SpriteRenderer safe;
     public GameObject safeZoomIn;
+
+    //the picture zoomed in and out mode
+    public SpriteRenderer jellyFishPainting;
+    public GameObject jellyFishPaintingZoomIn;
+
+    //Flower puzzle
+    public SpriteRenderer flower;
+    public GameObject flowerZoomIn;
 
     //a list of all the zoomed in things so we can turn them all off at the same time
     public List<GameObject> zoomedInEverything;
@@ -38,29 +50,52 @@ public class ZoomInScript : MonoBehaviour
     {
         if (context.performed == true)
         {
-            if (safe.bounds.Contains(mousePos))
+            if (lookAroundScript.walls[0].activeInHierarchy == true)
             {
-                wallOneZoomedOut.SetActive(false);
-                safeZoomIn.SetActive(true);
-                SwitchUiCanvas();
+
+                //go to safe puzzle
+                if (safe.bounds.Contains(mousePos))
+                {
+                    wallOneZoomedOut.SetActive(false);
+                    safeZoomIn.SetActive(true);
+                    SwitchUiCanvas();
+                }
+
+                //zoom in on jellyfish painting
+                if (jellyFishPainting.bounds.Contains(mousePos))
+                {
+                    wallOneZoomedOut.SetActive(false);
+                    jellyFishPaintingZoomIn.SetActive(true);
+                    SwitchUiCanvas();
+                }
+
+                //go to flower puzzle
+                if (flower.bounds.Contains(mousePos))
+                {
+                    wallOneZoomedOut.SetActive(false);
+                    flowerZoomIn.SetActive(true);
+                    SwitchUiCanvas();
+                }
+
             }
-
-
 
         }
     }
-    
+
     public void SwitchUiCanvas()
     {
-        changeWallUiArrows.SetActive(!changeWallUiArrows.activeSelf);
-        zoomBackOutUiArrows.SetActive(!changeWallUiArrows.activeSelf);
+        changeWallUiArrows.SetActive(false);
+        zoomBackOutUiArrows.SetActive(true);
     }
 
     public void zoomOutUiCanvasButton()
     {
+        changeWallUiArrows.SetActive(true);
+        zoomBackOutUiArrows.SetActive(false);
         for (int i = 0; i < zoomedInEverything.Count; i++)
         {
             zoomedInEverything[i].SetActive(false);
         }
+        lookAroundScript.walls[lookAroundScript.wallListNumber].SetActive(true);
     }
 }

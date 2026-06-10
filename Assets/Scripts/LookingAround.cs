@@ -198,10 +198,4 @@ public class LookingAround : MonoBehaviour
         }
     }
 
-    public void zoomBackOutUIButton()
-    {
-        //StartCoroutine(DoFadeOut());
-        walls[wallListNumber].SetActive(true);
-    }
-
 }
