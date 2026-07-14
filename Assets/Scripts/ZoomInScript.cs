@@ -11,7 +11,9 @@ public class ZoomInScript : MonoBehaviour
     //the players mouse
     private Vector2 mousePos;
 
-    //wall one zoomed out
+    //wall zero zoomed out
+    public GameObject wallZeroZoomedOut;
+    //wall 1 zoomed out
     public GameObject wallOneZoomedOut;
 
     //the ui to change which wall you are looking at
@@ -20,7 +22,7 @@ public class ZoomInScript : MonoBehaviour
     //the ui to zoom back out of an object
     public GameObject zoomBackOutUiArrows;
 
-    //the safe in zoomed out and zoomed in mode
+    //the safe zoomed out and zoomed in mode
     public SpriteRenderer safe;
     public GameObject safeZoomIn;
 
@@ -31,6 +33,10 @@ public class ZoomInScript : MonoBehaviour
     //Flower puzzle
     public SpriteRenderer flower;
     public GameObject flowerZoomIn;
+
+    //Bookshelf
+    public SpriteRenderer bookshelf;
+    public GameObject bookshelfZoomIn;
 
     //a list of all the zoomed in things so we can turn them all off at the same time
     public List<GameObject> zoomedInEverything;
@@ -56,7 +62,7 @@ public class ZoomInScript : MonoBehaviour
                 //go to safe puzzle
                 if (safe.bounds.Contains(mousePos))
                 {
-                    wallOneZoomedOut.SetActive(false);
+                    wallZeroZoomedOut.SetActive(false);
                     safeZoomIn.SetActive(true);
                     SwitchUiCanvas();
                 }
@@ -64,7 +70,7 @@ public class ZoomInScript : MonoBehaviour
                 //zoom in on jellyfish painting
                 if (jellyFishPainting.bounds.Contains(mousePos))
                 {
-                    wallOneZoomedOut.SetActive(false);
+                    wallZeroZoomedOut.SetActive(false);
                     jellyFishPaintingZoomIn.SetActive(true);
                     SwitchUiCanvas();
                 }
@@ -72,11 +78,20 @@ public class ZoomInScript : MonoBehaviour
                 //go to flower puzzle
                 if (flower.bounds.Contains(mousePos))
                 {
-                    wallOneZoomedOut.SetActive(false);
+                    wallZeroZoomedOut.SetActive(false);
                     flowerZoomIn.SetActive(true);
                     SwitchUiCanvas();
                 }
-
+            }
+            if (lookAroundScript.walls[1].activeInHierarchy == true)
+            {
+                //To bookshelf zoomed in
+                if (bookshelf.bounds.Contains(mousePos))
+                {
+                    wallOneZoomedOut.SetActive(false);
+                    bookshelfZoomIn.SetActive(true);
+                    SwitchUiCanvas();
+                }
             }
 
         }

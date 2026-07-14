@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class LookingAround : MonoBehaviour
 {
-    public List<GameObject> walls;
+    public List<GameObject> walls = new List<GameObject>();
 
     public int wallListNumber;
 
@@ -24,6 +24,11 @@ public class LookingAround : MonoBehaviour
 
     void Start()
     {
+        for (int i = 1; i < walls.Count; i++)
+        {
+            walls[i].SetActive(false);
+        }
+        walls[0].SetActive(true);
         wallListNumber = 0;
     }
 
