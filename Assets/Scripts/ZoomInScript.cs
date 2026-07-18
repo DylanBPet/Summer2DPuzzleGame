@@ -15,6 +15,8 @@ public class ZoomInScript : MonoBehaviour
     public GameObject wallZeroZoomedOut;
     //wall 1 zoomed out
     public GameObject wallOneZoomedOut;
+    //wall 2 zoomed out
+    public GameObject wallTwoZoomedOut;
 
     //the ui to change which wall you are looking at
     public GameObject changeWallUiArrows;
@@ -37,6 +39,13 @@ public class ZoomInScript : MonoBehaviour
     //Bookshelf
     public SpriteRenderer bookshelf;
     public GameObject bookshelfZoomIn;
+
+    //Looking OutsideWindow
+    public SpriteRenderer windowHitbox;
+    public GameObject windowZoomInNoMan;
+    public GameObject windowZoomInMan;
+    public int randomNumber;
+    public CurtainBehavior curtainScript;
 
     //a list of all the zoomed in things so we can turn them all off at the same time
     public List<GameObject> zoomedInEverything;
@@ -93,7 +102,30 @@ public class ZoomInScript : MonoBehaviour
                     SwitchUiCanvas();
                 }
             }
-
+            if (lookAroundScript.walls[2].activeInHierarchy == true)
+            {
+                if (windowHitbox.bounds.Contains(mousePos))
+                {
+                    if (curtainScript.curtainSpriteIndex == 0)
+                    {
+                        wallTwoZoomedOut.SetActive(false);
+                        randomNumber = Random.Range(1, 3);
+                        if (randomNumber == 1)
+                        {
+                            windowZoomInNoMan.SetActive(true);
+                        }
+                        else if (randomNumber == 2)
+                        {
+                            windowZoomInMan.SetActive(true);
+                        }
+                        SwitchUiCanvas();
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
         }
     }
 
