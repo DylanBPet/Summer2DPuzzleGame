@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -171,13 +170,6 @@ public class BookPuzzle : MonoBehaviour
 
             pickedUpBookNumber = null;
             pickedUpSlot = -1;
-
-            /*
-            for (int s = 0; s < bookInSlot.Length; s++)
-            {
-                Debug.Log("Slot " + s + " = " + (bookInSlot[s] == null ? "empty" : bookInSlot[s].ToString()));
-            }
-            */
         }
     }
 

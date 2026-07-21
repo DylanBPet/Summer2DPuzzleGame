@@ -9,49 +9,35 @@ public class FlowerScript : MonoBehaviour
     // Lists for the flower petals, thier starting location for resetting them, and the flower order to track which order they were pressed
     public List<GameObject> flowerPetals;
     public List<Vector3> flowerPetalStartingLocation;
-    public List<int> FlowerOrder;
+    public List<int> flowerOrder;
 
     //A bool to see if all petals are gone (to provide an answer)
-    public bool answerProvided;
+    public bool flowerPuzzleSolved = false;
 
     //Tracking the mouse position
     public Vector2 mousePos;
 
-    //The canvas tracker for playtesting
-    public TextMeshProUGUI testingResponse;
+    //the flower puzzle screen
+    public GameObject flowerPuzzle;
 
-
+    //the middle button (to reset Puzzle)
+    public SpriteRenderer flowerMiddle;
     void Start()
     {
         //gets the starting positions of the petals
         for (int i = 0; i < flowerPetals.Count; i++)
         {
-           flowerPetalStartingLocation.Add(flowerPetals[i].transform.position);
+           Transform flowerPetalsTransform = flowerPetals[i].GetComponent<Transform>();
+           flowerPetalStartingLocation.Add(flowerPetalsTransform.transform.position);
         }
+        //will be set to false later so it can run the first code first
+        flowerPuzzle.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {   
-        mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-
-        //Combination is E, S, NE, W, N, ES, WN, SW
-        if (FlowerOrder.Count == flowerPetals.Count && answerProvided == false)
-        {
-            answerProvided = true;
-            if (FlowerOrder[0] == 2 && FlowerOrder[1] == 4 && FlowerOrder[2] == 1 && FlowerOrder[3] == 6 && FlowerOrder[4] == 0 && FlowerOrder[5] == 3 && FlowerOrder[6] == 7 && FlowerOrder[7] == 5)
-            {
-                Debug.Log("You Solved the Puzzle!");
-                testingResponse.text = "Answer is Correct :)!";
-            }
-            else
-            {
-                Debug.Log("Incorrect");
-                testingResponse.text = "Answer is Incorrect :(";
-            }
-        }
-
-           
+        mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());         
     }
 
     public void OnAttack(InputAction.CallbackContext context)
@@ -70,8 +56,17 @@ public class FlowerScript : MonoBehaviour
                         bc.enabled = false;
                         StartCoroutine(PetalStartFalling(i));
                         Debug.Log("Petal " + i + " Has Been Clicked");
-                        FlowerOrder.Add(i);
+
+                        flowerOrder.Add(i);
+                        if (flowerPuzzleSolved == false)
+                        {
+                            CheckIfCorrect();
+                        }
                     }
+                }
+                if (flowerMiddle.bounds.Contains(mousePos))
+                {
+                    ResetFlower();
                 }
             }
         }
@@ -91,12 +86,35 @@ public class FlowerScript : MonoBehaviour
         for (int i = 0; i < flowerPetalStartingLocation.Count; ++i)
         {
             flowerPetals[i].transform.position = flowerPetalStartingLocation[i];
-            FlowerOrder.Clear();
-            testingResponse.text = "Waiting for Answer";
-            answerProvided = false;
+            flowerOrder.Clear();
             BoxCollider2D bc = flowerPetals[i].GetComponent<BoxCollider2D>();
             bc.enabled = true;
         }
         StopAllCoroutines();
+    }
+
+    public void CheckIfCorrect()
+    {
+        //N=0 NE=1 E=2 ES=3 S=4 SW=5 W=6 WN=7
+        //The player can pluck from L to S, OR S to L
+        //Combination (L to S) is SW, WN, NE, N, W, S, ES, E
+        //Combination (S to L) is E, ES, S, W, ES, N, WN, SW
+        if (flowerOrder.Count == 8)
+        {
+            if (flowerOrder[0] == 5 && flowerOrder[1] == 7 && flowerOrder[2] == 1 && flowerOrder[3] == 0 && flowerOrder[4] == 6 && flowerOrder[5] == 4 && flowerOrder[6] == 3 && flowerOrder[7] == 2
+               || flowerOrder[0] == 2 && flowerOrder[1] == 3 && flowerOrder[2] == 4 && flowerOrder[3] == 6 && flowerOrder[4] == 0 && flowerOrder[5] == 1 && flowerOrder[6] == 7 && flowerOrder[7] == 5)
+            {
+                Debug.Log("You Solved the Puzzle!");
+                flowerPuzzleSolved = true;
+            }
+            else
+            {
+                Debug.Log("Incorrect");
+            }
+        }
+        else
+        {
+            return;
+        }
     }
 }
