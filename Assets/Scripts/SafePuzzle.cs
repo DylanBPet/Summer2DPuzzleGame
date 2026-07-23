@@ -17,10 +17,10 @@ public class SafePuzzle : MonoBehaviour
     public GameObject unlockHandle;
 
     public Coroutine lockIsLockedCoroutine;
-    void Start()
-    {
-        
-    }
+
+    public ZoomedOutSafeMatches zoomedOutSafeIcons;
+
+    public GameObject gosafePuzzle;
 
     // Update is called once per frame
     void Update()
@@ -30,25 +30,30 @@ public class SafePuzzle : MonoBehaviour
 
     public void SwitchSafeIcons(InputAction.CallbackContext context)
     {
-        if (context.performed == true)
+        if (gosafePuzzle.activeInHierarchy)
         {
-            for (int i = 0; i < SafeIconSlots.Count; i++)
+            if (context.performed == true)
             {
-                SpriteRenderer SafeTouchableIcons = SafeIconSlots[i].GetComponent<SpriteRenderer>();
-
-                if (SafeTouchableIcons.bounds.Contains(mousePos))
+                for (int i = 0; i < SafeIconSlots.Count; i++)
                 {
-                    if (i <= 3) //Its the top row
+                    SpriteRenderer SafeTouchableIcons = SafeIconSlots[i].GetComponent<SpriteRenderer>();
+
+                    if (SafeTouchableIcons.bounds.Contains(mousePos))
                     {
-                        SwitchingTopIcons(i, SafeTouchableIcons);
-                    }
-                    else if (i >= 4) //its the bottom row
-                    {
-                        SwitchingBotIcons(i, SafeTouchableIcons);
-                    }
-                } 
+                        if (i <= 3) //Its the top row
+                        {
+                            SwitchingTopIcons(i, SafeTouchableIcons);
+                        }
+                        else if (i >= 4) //its the bottom row
+                        {
+                            SwitchingBotIcons(i, SafeTouchableIcons);
+                        }
+                        MatchZoomedOutIcons();
+                    } 
+                }
             }
         }
+        
     }
 
     public void SwitchingTopIcons(int i, SpriteRenderer slotSprite)
@@ -150,4 +155,13 @@ public class SafePuzzle : MonoBehaviour
         }
     }
 
+    public void MatchZoomedOutIcons()
+    {
+        //this will change the state of the zoomed out mode
+        for (int i = 0; i < SafeIconSlots.Count; i++)
+        {
+            SpriteRenderer sIcons = SafeIconSlots[i].GetComponent<SpriteRenderer>();
+            zoomedOutSafeIcons.safeKeys[i].sprite = sIcons.sprite;
+        }
+    }
 }

@@ -10,10 +10,12 @@ public class LoadEverything : MonoBehaviour
         for (int i = 0; i < puzzlesToLoad.Count; i++)
         {
             puzzlesToLoad[i].gameObject.SetActive(true);
+            //Debug.Log("Puzzle " + i + "Has been Loaded");
         }
         for (int i = 0; i < puzzlesToLoad.Count; i++)
         {
             puzzlesToLoad[i].gameObject.SetActive(false);
+            //Debug.Log("Puzzle " + i + "Has been turned off");
         }
     }
 

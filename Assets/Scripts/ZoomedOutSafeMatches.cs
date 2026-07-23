@@ -15,10 +15,6 @@ public class ZoomedOutSafeMatches : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < spScript.SafeIconSlots.Count; i++)
-        {
-            SpriteRenderer sIcons = spScript.SafeIconSlots[i].GetComponent<SpriteRenderer>();
-            safeKeys[i].sprite = sIcons.sprite;
-        }
+
     }
 }

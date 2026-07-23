@@ -25,9 +25,11 @@ public class BookPuzzle : MonoBehaviour
     private const float occupiedThreshold = 0.1f;
     private const float snapRange = 3f;
 
+    public GameObject goBookPuzzle;
     void Start()
     {
         pickedUpBookNumber = null;
+
     }
 
     // Update is called once per frame
@@ -55,119 +57,126 @@ public class BookPuzzle : MonoBehaviour
     }
     public void PickingUpBooks(InputAction.CallbackContext context)
     {
-        EnsureInitialized();
-        //When mouse is clicked and on top of a book in the array, that book becomes PickedUp
-        for (int i = 0; i < books.Count; i++)
+        if (goBookPuzzle.activeInHierarchy)
         {
-            //get the sprite renderer for the current book
-            SpriteRenderer bsr = books[i].GetComponent<SpriteRenderer>();
-
-            //if current book has mouse on it and context is started (mouse has been pressed this frame)
-            if (bsr.bounds.Contains(mousePos) && context.started == true)
+            EnsureInitialized();
+            //When mouse is clicked and on top of a book in the array, that book becomes PickedUp
+            for (int i = 0; i < books.Count; i++)
             {
-                //set the int? to be the number in the book list i as a reference
-                pickedUpBookNumber = i;
+                //get the sprite renderer for the current book
+                SpriteRenderer bsr = books[i].GetComponent<SpriteRenderer>();
 
-                //track the original position of the book
-                originalPos = books[i].transform.position;
-
-                //Debug.Log("Book " + pickedUpBookNumber + " Has Been Picked Up");
-
-                //find the selected book and what slot number it is in
-                pickedUpSlot = FindSlotOfBook(i);
-
-                if (pickedUpSlot != -1)
+                //if current book has mouse on it and context is started (mouse has been pressed this frame)
+                if (bsr.bounds.Contains(mousePos) && context.started == true)
                 {
-                    //empty the slot of the book that has just been picked up 
-                    //so that it == null, that way the code knows that spot is not OPEN for another book later or if the picked up book is placed in the same row (or the same book if it returns to originalPos)
-                    bookInSlot[pickedUpSlot] = null;
+                    //set the int? to be the number in the book list i as a reference
+                    pickedUpBookNumber = i;
+
+                    //track the original position of the book
+                    originalPos = books[i].transform.position;
+
+                    //Debug.Log("Book " + pickedUpBookNumber + " Has Been Picked Up");
+
+                    //find the selected book and what slot number it is in
+                    pickedUpSlot = FindSlotOfBook(i);
+
+                    if (pickedUpSlot != -1)
+                    {
+                        //empty the slot of the book that has just been picked up 
+                        //so that it == null, that way the code knows that spot is not OPEN for another book later or if the picked up book is placed in the same row (or the same book if it returns to originalPos)
+                        bookInSlot[pickedUpSlot] = null;
+                    }
+                    break;
                 }
-                break;
+            }
+        }
+    }
+
+    public void PuttingDownBook(InputAction.CallbackContext context)
+    {
+        if (goBookPuzzle.activeInHierarchy)
+        {
+            EnsureInitialized();
+            if (context.canceled == true)
+            {
+                if (pickedUpBookNumber == null)
+                {
+                    //do nothing
+                    return;
+                }
+
+                //Debug.Log("Book " + pickedUpBookNumber + " Has Been Placed");
+
+                int bookNumber = pickedUpBookNumber.Value;
+
+                //set the indext to out of range so there is out of range errors
+                int closestIndex = -1;
+
+                //set the closest distance to THE MAX so there is no errors
+                float closestDist = float.MaxValue;
+
+                for (int i = 0; i < rowSections.Count; i++)
+                {
+                    float dist = Vector2.Distance(books[bookNumber].transform.position, rowSections[i].transform.position);
+                    //if the new distance is closer than the previous ones, replace the index and closest dist
+                    if (dist < closestDist)
+                    {
+                        closestDist = dist;
+                        closestIndex = i;
+                    }
+                }
+
+                bool placed = false;
+
+                //Debug.Log("ClosestIndex= " + closestIndex + " ClosestDist= " + closestDist + "SnapRange= " + snapRange);
+
+                if (closestIndex != -1 && closestDist < snapRange)
+                {
+                    //figure out the bounds of the row this slot belongs to
+
+                    //This takes the closest number the book is on (between 0 and 14) (1 for each bookshelf slot) 
+                    //and devides it by 5 (how many are in each row), c# will turn this into a whole number because it is an INT not a FLOAT
+                    //so when we devide anything less than 5 it will = 0 to say "Its on row 0!"
+                    //This is the same for row 1, anything above 5 will round to 1 to say "Its on row 1!" and so on
+                    int rowIndex = closestIndex / slotsPerRow;
+
+                    //we then need to take that index we just got and make it back into FIRST indext of the row (we do this to keep track of what row)
+                    //we JUST made the rowIndex a single digit number to say what row we are on (0, 1, 2) now we need to say what is the START ROW NUMBER (0, 5, 10)
+                    int rowStart = rowIndex * slotsPerRow;
+
+                    //we then add the number of slots per row to get the row length. in the previous step we find the start of the row, now we need to find the end (4, 9, 14)
+                    //we subract 1 from it because we are removing 1 book when we pick it up
+                    int rowEnd = rowStart + slotsPerRow - 1;
+
+                    //Debug.Log("rowIndex= " + rowIndex + " rowStart= " + rowStart + " rowEnd " + rowEnd);
+
+                    if (MakeRoomAtSlot(closestIndex, rowStart, rowEnd))
+                    {
+                        //since makeRoomAtSlot has passed as true, there is now an open spot to place the book
+                        //we can now place the book in the desired spot and set the bookInSlot int to the correct number
+                        bookInSlot[closestIndex] = bookNumber;
+                        books[bookNumber].transform.position = rowSections[closestIndex].transform.position;
+                        placed = true;
+                    }
+                }
+
+                if (!placed)
+                {
+                    //put the book back where it came from
+                    if (pickedUpSlot != -1)
+                    {
+                        //reset the book int back into its original slot number
+                        bookInSlot[pickedUpSlot] = bookNumber;
+                    }
+                    //place book transform back to original position
+                    books[bookNumber].transform.position = originalPos;
+                }
+
+                pickedUpBookNumber = null;
+                pickedUpSlot = -1;
             }
         }
         
-    }
-    public void PuttingDownBook(InputAction.CallbackContext context)
-    {
-        EnsureInitialized();
-        if (context.canceled == true)
-        {
-            if (pickedUpBookNumber == null)
-            {
-                //do nothing
-                return;
-            }
-
-            //Debug.Log("Book " + pickedUpBookNumber + " Has Been Placed");
-
-            int bookNumber = pickedUpBookNumber.Value;
-
-            //set the indext to out of range so there is out of range errors
-            int closestIndex = -1;
-
-            //set the closest distance to THE MAX so there is no errors
-            float closestDist = float.MaxValue;
-
-            for (int i = 0; i < rowSections.Count; i++)
-            {
-                float dist = Vector2.Distance(books[bookNumber].transform.position, rowSections[i].transform.position);
-                //if the new distance is closer than the previous ones, replace the index and closest dist
-                if (dist < closestDist)
-                {
-                    closestDist = dist;
-                    closestIndex = i;
-                }
-            }
-
-            bool placed = false;
-
-            //Debug.Log("ClosestIndex= " + closestIndex + " ClosestDist= " + closestDist + "SnapRange= " + snapRange);
-
-            if (closestIndex != -1 && closestDist < snapRange)
-            {
-                //figure out the bounds of the row this slot belongs to
-
-                //This takes the closest number the book is on (between 0 and 14) (1 for each bookshelf slot) 
-                //and devides it by 5 (how many are in each row), c# will turn this into a whole number because it is an INT not a FLOAT
-                //so when we devide anything less than 5 it will = 0 to say "Its on row 0!"
-                //This is the same for row 1, anything above 5 will round to 1 to say "Its on row 1!" and so on
-                int rowIndex = closestIndex / slotsPerRow;
-
-                //we then need to take that index we just got and make it back into FIRST indext of the row (we do this to keep track of what row)
-                //we JUST made the rowIndex a single digit number to say what row we are on (0, 1, 2) now we need to say what is the START ROW NUMBER (0, 5, 10)
-                int rowStart = rowIndex * slotsPerRow;
-
-                //we then add the number of slots per row to get the row length. in the previous step we find the start of the row, now we need to find the end (4, 9, 14)
-                //we subract 1 from it because we are removing 1 book when we pick it up
-                int rowEnd = rowStart + slotsPerRow - 1;
-
-                //Debug.Log("rowIndex= " + rowIndex + " rowStart= " + rowStart + " rowEnd " + rowEnd);
-
-                if (MakeRoomAtSlot(closestIndex, rowStart, rowEnd))
-                {
-                    //since makeRoomAtSlot has passed as true, there is now an open spot to place the book
-                    //we can now place the book in the desired spot and set the bookInSlot int to the correct number
-                    bookInSlot[closestIndex] = bookNumber;
-                    books[bookNumber].transform.position = rowSections[closestIndex].transform.position;
-                    placed = true;
-                }
-            }
-
-            if (!placed)
-            {
-                //put the book back where it came from
-                if (pickedUpSlot != -1)
-                {
-                    //reset the book int back into its original slot number
-                    bookInSlot[pickedUpSlot] = bookNumber;
-                }
-                //place book transform back to original position
-                books[bookNumber].transform.position = originalPos;
-            }
-
-            pickedUpBookNumber = null;
-            pickedUpSlot = -1;
-        }
     }
 
     
