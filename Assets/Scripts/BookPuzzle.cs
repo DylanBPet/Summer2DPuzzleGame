@@ -25,12 +25,9 @@ public class BookPuzzle : MonoBehaviour
     private const float occupiedThreshold = 0.1f;
     private const float snapRange = 3f;
 
-    public GameObject wall3ZoomedIn;
     void Start()
     {
         pickedUpBookNumber = null;
-
-        wall3ZoomedIn.SetActive(false);
     }
 
     // Update is called once per frame

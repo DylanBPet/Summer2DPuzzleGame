@@ -30,8 +30,6 @@ public class FlowerScript : MonoBehaviour
            Transform flowerPetalsTransform = flowerPetals[i].GetComponent<Transform>();
            flowerPetalStartingLocation.Add(flowerPetalsTransform.transform.position);
         }
-        //will be set to false later so it can run the first code first
-        flowerPuzzle.SetActive(false);
     }
 
     // Update is called once per frame
