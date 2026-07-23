@@ -10504,7 +10504,6 @@ MonoBehaviour:
   - {fileID: 573409033}
   - {fileID: 997279998}
   - {fileID: 187792157}
-  wall3ZoomedIn: {fileID: 1191496669}
 --- !u!1 &1489415853
 GameObject:
   m_ObjectHideFlags: 0
@@ -11110,6 +11109,7 @@ GameObject:
   - component: {fileID: 1540825141}
   - component: {fileID: 1540825140}
   - component: {fileID: 1540825142}
+  - component: {fileID: 1540825143}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -11360,6 +11360,22 @@ MonoBehaviour:
   - {fileID: 1191496669}
   - {fileID: 657975527}
   - {fileID: 727955124}
+--- !u!114 &1540825143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540825139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 598165b815103214fa0f7f7ed2a64e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoadEverything
+  puzzlesToLoad:
+  - {fileID: 718264895}
+  - {fileID: 1191496669}
+  - {fileID: 2019915733}
 --- !u!1 &1551801745
 GameObject:
   m_ObjectHideFlags: 0
@@ -14468,7 +14484,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2019915734
 MonoBehaviour:
   m_ObjectHideFlags: 0
