@@ -22,6 +22,9 @@ public class SafePuzzle : MonoBehaviour
 
     public GameObject gosafePuzzle;
 
+    public TextMasterScript textScript;
+
+
     // Update is called once per frame
     void Update()
     {
@@ -115,6 +118,7 @@ public class SafePuzzle : MonoBehaviour
                     {
                         Debug.Log("Answer Incorrect");
                         StartLockIsLockedCoroutine();
+                        textScript.MakeTextVisible("Its Locked");
                         return;
                     }
                 }
