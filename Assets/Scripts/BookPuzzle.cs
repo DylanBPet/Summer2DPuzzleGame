@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -21,11 +22,16 @@ public class BookPuzzle : MonoBehaviour
     private int pickedUpSlot = -1; 
 
     //track the rows and columns
-    private const int slotsPerRow = 5;
+    private const int slotsPerRow = 4;
     private const float occupiedThreshold = 0.1f;
     private const float snapRange = 3f;
 
     public GameObject goBookPuzzle;
+
+    //stuff to do with the answer
+    public bool bookPuzzleIsSolved = false;
+    public SpriteRenderer answerKey;
+
     void Start()
     {
         pickedUpBookNumber = null;
@@ -174,6 +180,7 @@ public class BookPuzzle : MonoBehaviour
 
                 pickedUpBookNumber = null;
                 pickedUpSlot = -1;
+                CheckIfCorrect();
             }
         }
         
@@ -306,5 +313,47 @@ public class BookPuzzle : MonoBehaviour
             Debug.Log("Slot " + s + " = " + (bookInSlot[s] == null ? "empty" : bookInSlot[s].ToString()));
         }
         */
+    }
+
+    private void CheckIfCorrect()
+    {
+        if (bookInSlot[0] == 0 && bookInSlot[1] == 6 && bookInSlot[2] == 4 && bookInSlot[3] == null && bookInSlot[4] == null && bookInSlot[5] == 5 && bookInSlot[6] == 2
+            && bookInSlot[7] == 8 && bookInSlot[8] == 7 && bookInSlot[9] == 1 && bookInSlot[10] == 3 && bookInSlot[11] == null)
+        {
+            //answer is correct
+            CorectAnswer();
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    public void CorectAnswer()
+    {
+        //start a coroutine that makes the safe combination visible
+        if (bookPuzzleIsSolved == false)
+        {
+            StartCoroutine(RevealAnswer());
+            bookPuzzleIsSolved = true;
+            Debug.Log("Bookshelf puzzle SOLVED");
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    IEnumerator RevealAnswer()
+    {
+        float a = 0;
+        while (a < 1)
+        {
+            a += 0.01f;
+            answerKey.color = new Color(1, 1, 1, a);
+            //yield return new WaitForSeconds(0.08f);
+            yield return null;
+        }
+       
     }
 }

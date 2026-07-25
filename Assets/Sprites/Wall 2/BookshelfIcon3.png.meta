@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 692a866596bf40a4c9520c96ca23c138
+guid: 091de91f5f959e94bbf1163797775551
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -794412658098341143
-    second: Glitched_Book_0
-  - first:
-      213: 4842993628263713842
-    second: Glitched_Book_1
-  - first:
-      213: -7268460677018185589
-    second: Glitched_Book_2
+      213: 8407447913016687518
+    second: BookshelfIcon3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -119,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Glitched_Book_1
+      name: BookshelfIcon3_0
       rect:
         serializedVersion: 2
-        x: 666
-        y: 658
-        width: 701
-        height: 885
+        x: 1160
+        y: 848
+        width: 514
+        height: 550
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 23c832eab05c53340800000000000000
-      internalID: 4842993628263713842
+      spriteID: e9b75f215514da470800000000000000
+      internalID: 8407447913016687518
       vertices: []
       indices: 
       edges: []
@@ -144,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ca0b41d64f0e3444a99a695d0affe10a
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -154,9 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Glitched_Book_0: -794412658098341143
-      Glitched_Book_1: 4842993628263713842
-      Glitched_Book_2: -7268460677018185589
+      BookshelfIcon3_0: 8407447913016687518
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
