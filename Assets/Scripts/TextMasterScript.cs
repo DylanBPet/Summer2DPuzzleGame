@@ -20,6 +20,9 @@ public class TextMasterScript : MonoBehaviour
     //far away bookshelf
     public SpriteRenderer farBookshelfHitbox;
 
+    //the main area
+    public GameObject mainRoom;
+
     void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
@@ -29,13 +32,18 @@ public class TextMasterScript : MonoBehaviour
     {
         if (context.performed == true)
         {
-            if (largeDoorHitbox.bounds.Contains(mousePos))
+            if (mainRoom.activeInHierarchy)
             {
-                MakeTextVisible("Its Locked");
-            }
-            if (farBookshelfHitbox.bounds.Contains(mousePos))
-            {
-                MakeTextVisible("Its too far");
+                if (largeDoorHitbox.bounds.Contains(mousePos))
+                {
+                    MakeTextVisible("Its Locked");
+                }
+            
+           
+                if (farBookshelfHitbox.bounds.Contains(mousePos))
+                {
+                    MakeTextVisible("Its too far");
+                }
             }
         }
     }
@@ -54,7 +62,7 @@ public class TextMasterScript : MonoBehaviour
         float a = 0;
         while (a < 1)
         {
-            a += 0.02f;
+            a += Time.deltaTime * 0.8f;
             cloud1.color = new Color(0, 0, 0, a);
             cloud2.color = new Color(0, 0, 0, a);
             onScreenText.color = new Color(1, 1, 1, a);
@@ -65,7 +73,7 @@ public class TextMasterScript : MonoBehaviour
 
         while (a > 0)
         {
-            a -= 0.02f;
+            a -= Time.deltaTime * 0.8f;
             cloud1.color = new Color(0, 0, 0, a);
             cloud2.color = new Color(0, 0, 0, a);
             onScreenText.color = new Color(1, 1, 1, a);
