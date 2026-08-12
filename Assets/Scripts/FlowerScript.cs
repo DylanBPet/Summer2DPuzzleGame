@@ -12,7 +12,7 @@ public class FlowerScript : MonoBehaviour
     public List<int> flowerOrder;
 
     //A bool to see if all petals are gone (to provide an answer)
-    public bool flowerPuzzleSolved = false;
+    public bool? flowerPuzzleSolved = null;
 
     //Tracking the mouse position
     public Vector2 mousePos;
@@ -22,6 +22,11 @@ public class FlowerScript : MonoBehaviour
 
     //the middle button (to reset Puzzle)
     public SpriteRenderer flowerMiddle;
+
+    public GameObject pulseingMiddle;
+    Coroutine flowerCenterPulse;
+    public AnimationCurve flowerPulseCurve;
+
     void Start()
     {
         //gets the starting positions of the petals
@@ -35,8 +40,44 @@ public class FlowerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());         
+        mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        if (flowerPuzzleSolved == false)
+        {
+            if (flowerCenterPulse != null)
+            {
+
+            }
+            else
+            {
+                StartCoroutine(BeginFlowerPulse());
+            }
+        }
     }
+
+    IEnumerator BeginFlowerPulse()
+    {
+        if (flowerCenterPulse != null)
+        {
+
+        }
+        else
+        {
+            yield return flowerCenterPulse = StartCoroutine(FlowerCenterPulse());
+            flowerCenterPulse = null;
+        }
+    }
+
+    IEnumerator FlowerCenterPulse()
+    {
+        float t = 0;
+        while (t <= 1)
+        {
+            pulseingMiddle.transform.localScale = Vector2.one * flowerPulseCurve.Evaluate(t);
+            t += Time.deltaTime;
+            yield return null;
+        }
+    }
+
 
     public void OnAttack(InputAction.CallbackContext context)
     {
@@ -56,7 +97,7 @@ public class FlowerScript : MonoBehaviour
                         Debug.Log("Petal " + i + " Has Been Clicked");
 
                         flowerOrder.Add(i);
-                        if (flowerPuzzleSolved == false)
+                        if (flowerPuzzleSolved == null)
                         {
                             CheckIfCorrect();
                         }
@@ -81,6 +122,8 @@ public class FlowerScript : MonoBehaviour
 
     public void ResetFlower()
     {
+        flowerPuzzleSolved = null;
+        flowerCenterPulse = null;
         for (int i = 0; i < flowerPetalStartingLocation.Count; ++i)
         {
             flowerPetals[i].transform.position = flowerPetalStartingLocation[i];
@@ -108,6 +151,7 @@ public class FlowerScript : MonoBehaviour
             else
             {
                 Debug.Log("Incorrect");
+                flowerPuzzleSolved = false;
             }
         }
         else

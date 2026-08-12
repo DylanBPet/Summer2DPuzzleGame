@@ -4,19 +4,11 @@ using UnityEngine.InputSystem;
 
 public class ZoomInScript : MonoBehaviour
 {
-
-    //script for looking around
-    public LookingAround lookAroundScript;
-
     //the players mouse
     private Vector2 mousePos;
 
-    //wall zero zoomed out
-    public GameObject wallZeroZoomedOut;
-    //wall 1 zoomed out
-    public GameObject wallOneZoomedOut;
-    //wall 2 zoomed out
-    public GameObject wallTwoZoomedOut;
+    //walls zoomed out
+    public GameObject allWalls;
 
     //the ui to change which wall you are looking at
     public GameObject changeWallUiArrows;
@@ -47,6 +39,13 @@ public class ZoomInScript : MonoBehaviour
     public int randomNumber;
     public CurtainBehavior curtainScript;
 
+    //blackLight Puzzle
+    public SpriteRenderer blackLightPuzzleHitbox;
+    public GameObject blackLightZoomedIn;
+
+    //zoom in on bookshelf rules
+    public SpriteRenderer bookshelfRulesSR;
+    public GameObject bookshelfRules;
     //a list of all the zoomed in things so we can turn them all off at the same time
     public List<GameObject> zoomedInEverything;
 
@@ -65,13 +64,12 @@ public class ZoomInScript : MonoBehaviour
     {
         if (context.performed == true)
         {
-            if (lookAroundScript.walls[0].activeInHierarchy == true)
+            if (allWalls.activeInHierarchy)
             {
-
                 //go to safe puzzle
                 if (safe.bounds.Contains(mousePos))
                 {
-                    wallZeroZoomedOut.SetActive(false);
+                    allWalls.SetActive(false);
                     safeZoomIn.SetActive(true);
                     SwitchUiCanvas();
                 }
@@ -79,7 +77,7 @@ public class ZoomInScript : MonoBehaviour
                 //zoom in on jellyfish painting
                 if (jellyFishPainting.bounds.Contains(mousePos))
                 {
-                    wallZeroZoomedOut.SetActive(false);
+                    allWalls.SetActive(false);
                     jellyFishPaintingZoomIn.SetActive(true);
                     SwitchUiCanvas();
                 }
@@ -87,28 +85,24 @@ public class ZoomInScript : MonoBehaviour
                 //go to flower puzzle
                 if (flower.bounds.Contains(mousePos))
                 {
-                    wallZeroZoomedOut.SetActive(false);
+                    allWalls.SetActive(false);
                     flowerZoomIn.SetActive(true);
                     SwitchUiCanvas();
                 }
-            }
-            if (lookAroundScript.walls[1].activeInHierarchy == true)
-            {
                 //To bookshelf zoomed in
                 if (bookshelf.bounds.Contains(mousePos))
                 {
-                    wallOneZoomedOut.SetActive(false);
+                    allWalls.SetActive(false);
                     bookshelfZoomIn.SetActive(true);
                     SwitchUiCanvas();
                 }
-            }
-            if (lookAroundScript.walls[2].activeInHierarchy == true)
-            {
+
+                //window
                 if (windowHitbox.bounds.Contains(mousePos))
                 {
                     if (curtainScript.curtainSpriteIndex == 0)
                     {
-                        wallTwoZoomedOut.SetActive(false);
+                        allWalls.SetActive(false);
                         randomNumber = Random.Range(1, 3);
                         if (randomNumber == 1)
                         {
@@ -124,6 +118,22 @@ public class ZoomInScript : MonoBehaviour
                     {
                         return;
                     }
+                }
+
+                //blachlightPuzzle
+                if (blackLightPuzzleHitbox.bounds.Contains(mousePos))
+                {
+                    allWalls.SetActive(false);
+                    blackLightZoomedIn.SetActive(true);
+                    SwitchUiCanvas();
+                }
+
+                //Bookshelf Hint paper
+                if (bookshelfRulesSR.bounds.Contains(mousePos))
+                {
+                    allWalls.SetActive(false);
+                    bookshelfRules.SetActive(true);
+                    SwitchUiCanvas();
                 }
             }
         }
@@ -143,6 +153,6 @@ public class ZoomInScript : MonoBehaviour
         {
             zoomedInEverything[i].SetActive(false);
         }
-        lookAroundScript.walls[lookAroundScript.wallListNumber].SetActive(true);
+        allWalls.SetActive(true);
     }
 }
