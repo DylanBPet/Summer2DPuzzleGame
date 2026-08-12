@@ -21,9 +21,25 @@ public class Invintory : MonoBehaviour
 
     private int? itemPickedUpFromInventoryID;
 
+    //key
     public SpriteRenderer item0DropOff;
+    //eye
+    public SpriteRenderer item1DropOff;
+    public GameObject cat;
+
+    //ITEM 2 has no drop off (blacklight)
+    
+    //glitched book
+    public SpriteRenderer item3DropOff;
+
+    //Binoculars
+    public SpriteRenderer item4DropOff;
+    public GameObject glitchedBookZoomedIn;
 
     public Vector2 usedItemsDropoff;
+
+    //zoom in script
+    public ZoomInScript zoomInScript;
 
     void Start()
     {
@@ -81,6 +97,7 @@ public class Invintory : MonoBehaviour
                             itemTagInInventory[s] = i;
                             isItemInInventory[i] = true;
                             inInventoryItems[i].SetActive(true);
+                            inWorldinventoryItems[i].SetActive(false);
                             break;
                         }
                     }  
@@ -141,11 +158,56 @@ public class Invintory : MonoBehaviour
         }
         else if (itemID == 1)
         {
-            inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
+            if (item1DropOff.bounds.Contains(inInventoryItems[itemID].transform.position))
+            {
+                //the cat will run away
+                cat.SetActive(false);
+                //make blacklight visible
+                inWorldinventoryItems[2].SetActive(true);
+
+                //get rid of the used item
+                inInventoryItems[itemID].transform.position = usedItemsDropoff;
+
+                Debug.Log("item 0 has been given away");
+
+                itemTagInInventory[returnTag] = null;
+            }
+            else
+            {
+                inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
+            }
+               
         }
         else if (itemID == 2)
         {
+
             inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
+            
         }
+        else if (itemID == 3)
+        {
+            if (item3DropOff.bounds.Contains(inInventoryItems[itemID].transform.position))
+            {
+
+            }
+            else
+            {
+                inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
+            }
+        }
+        else if (itemID == 4)
+        {
+            if (item4DropOff.bounds.Contains(inInventoryItems[itemID].transform.position))
+            {
+                zoomInScript.allWalls.SetActive(false);
+                glitchedBookZoomedIn.SetActive(true);
+                zoomInScript.SwitchUiCanvas();
+            }
+            else
+            {
+                inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
+            }
+        }
+
     }
 }

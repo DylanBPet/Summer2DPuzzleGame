@@ -27,6 +27,7 @@ public class ZoomInScript : MonoBehaviour
     //Flower puzzle
     public SpriteRenderer flower;
     public GameObject flowerZoomIn;
+    public FlowerScript flowerPuzzleScript;
 
     //Bookshelf
     public SpriteRenderer bookshelf;
@@ -89,12 +90,20 @@ public class ZoomInScript : MonoBehaviour
                 }
 
                 //go to flower puzzle
-                if (flower.bounds.Contains(mousePos))
+                if (flowerPuzzleScript.flowerPuzzleSolved != true)
                 {
-                    allWalls.SetActive(false);
-                    flowerZoomIn.SetActive(true);
-                    SwitchUiCanvas();
+                    if (flower.bounds.Contains(mousePos))
+                    {
+                        allWalls.SetActive(false);
+                        flowerZoomIn.SetActive(true);
+                        SwitchUiCanvas();
+                    }
                 }
+                else
+                {
+                    return;
+                }
+                
                 //To bookshelf zoomed in
                 if (bookshelf.bounds.Contains(mousePos))
                 {

@@ -17,6 +17,9 @@ public class TextMasterScript : MonoBehaviour
     //LargeDoorHitbox
     public SpriteRenderer largeDoorHitbox;
 
+    //far away bookshelf
+    public SpriteRenderer farBookshelfHitbox;
+
     void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
@@ -29,6 +32,10 @@ public class TextMasterScript : MonoBehaviour
             if (largeDoorHitbox.bounds.Contains(mousePos))
             {
                 MakeTextVisible("Its Locked");
+            }
+            if (farBookshelfHitbox.bounds.Contains(mousePos))
+            {
+                MakeTextVisible("Its too far");
             }
         }
     }

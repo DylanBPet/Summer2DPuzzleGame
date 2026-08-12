@@ -27,6 +27,10 @@ public class FlowerScript : MonoBehaviour
     Coroutine flowerCenterPulse;
     public AnimationCurve flowerPulseCurve;
 
+    //when solved, change the zoomed flower sprite to the eye
+    public GameObject eyeITEM;
+    public SpriteRenderer zoomedOutFlower;
+
     void Start()
     {
         //gets the starting positions of the petals
@@ -147,6 +151,7 @@ public class FlowerScript : MonoBehaviour
             {
                 Debug.Log("You Solved the Puzzle!");
                 flowerPuzzleSolved = true;
+                eyeITEM.SetActive(true);
             }
             else
             {
