@@ -46,6 +46,12 @@ public class ZoomInScript : MonoBehaviour
     //zoom in on bookshelf rules
     public SpriteRenderer bookshelfRulesSR;
     public GameObject bookshelfRules;
+
+    //Compass
+    public SpriteRenderer compassSR;
+    public GameObject compassZoomedIn;
+
+
     //a list of all the zoomed in things so we can turn them all off at the same time
     public List<GameObject> zoomedInEverything;
 
@@ -133,6 +139,14 @@ public class ZoomInScript : MonoBehaviour
                 {
                     allWalls.SetActive(false);
                     bookshelfRules.SetActive(true);
+                    SwitchUiCanvas();
+                }
+
+                //Compass
+                if (compassSR.bounds.Contains(mousePos))
+                {
+                    allWalls.SetActive(false);
+                    compassZoomedIn.SetActive(true);
                     SwitchUiCanvas();
                 }
             }

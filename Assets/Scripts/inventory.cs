@@ -8,7 +8,9 @@ using static UnityEditor.Progress;
 
 public class Invintory : MonoBehaviour
 {
-    public List<GameObject> inventoryItems;
+    public List<GameObject> inWorldinventoryItems;
+
+    public List<GameObject> inInventoryItems;
 
     public List<GameObject> inventorySlots;
 
@@ -27,7 +29,7 @@ public class Invintory : MonoBehaviour
     {
 
         itemTagInInventory = new int?[inventorySlots.Count];
-        isItemInInventory = new bool[inventoryItems.Count];
+        isItemInInventory = new bool[inWorldinventoryItems.Count];
         for (int i = 0; i < itemTagInInventory.Length; i++)
         {
             itemTagInInventory[i] = null;
@@ -61,10 +63,11 @@ public class Invintory : MonoBehaviour
     {
         if (context.performed == true)
         {
-            for (int i = 0; i < inventoryItems.Count; i++)
+            for (int i = 0; i < inWorldinventoryItems.Count; i++)
             {
-               SpriteRenderer InvItemSr = inventoryItems[i].GetComponent<SpriteRenderer>();
-                if (InvItemSr.bounds.Contains(mousePos) && isItemInInventory[i] == false)
+               SpriteRenderer InvItemSr = inWorldinventoryItems[i].GetComponent<SpriteRenderer>();
+                SpriteRenderer inInvItemSR = inInventoryItems[i].GetComponent<SpriteRenderer>();
+                if (InvItemSr.bounds.Contains(mousePos) && isItemInInventory[i] == false && inWorldinventoryItems[i].activeInHierarchy)
                 {
                     //the item is not in inventory
                     Debug.Log("player has clicked item number " + i);
@@ -73,14 +76,16 @@ public class Invintory : MonoBehaviour
                         if (itemTagInInventory[s] == null)
                         {
                             Debug.Log("item slot " + s + " has been filled");
-                            StartCoroutine(PickingUpItemAnim(s, i));
+                            //StartCoroutine(PickingUpItemAnim());
+                            inInventoryItems[i].transform.position = inventorySlots[s].transform.position;
                             itemTagInInventory[s] = i;
                             isItemInInventory[i] = true;
+                            inInventoryItems[i].SetActive(true);
                             break;
                         }
                     }  
                 }
-                else if (InvItemSr.bounds.Contains(mousePos) && isItemInInventory[i] == true)
+                else if (inInvItemSR.bounds.Contains(mousePos) && isItemInInventory[i] == true)
                 {
                     //the item is already in inventory
                     itemPickedUpFromInventoryID = i;
@@ -92,15 +97,8 @@ public class Invintory : MonoBehaviour
     //the "animation" of the item going into inventory
     IEnumerator PickingUpItemAnim(int invSlotNum, int itemNum)
     {
-        float t = 0;
-        Vector2 originalPos = inventoryItems[itemNum].transform.position;
-        while (t < 1)
-        {
-            inventoryItems[itemNum].transform.position = Vector2.Lerp(originalPos, inventorySlots[invSlotNum].transform.position, t);
-            t += 0.8f * Time.deltaTime;
-            yield return null;
-        }
-        itemTagInInventory[invSlotNum] = itemNum;
+        //this will be the item in inventory blinking for a second when you first pickit up
+        yield return null;
 
     }
 
@@ -112,7 +110,7 @@ public class Invintory : MonoBehaviour
         if (Mouse.current.leftButton.isPressed)
         {
             //item is being carried around
-            inventoryItems[itemID].transform.position = mousePos;
+            inInventoryItems[itemID].transform.position = mousePos;
         }
         else
         {
@@ -127,9 +125,9 @@ public class Invintory : MonoBehaviour
     {
         if (itemID == 0)
         {
-            if (item0DropOff.bounds.Contains(inventoryItems[itemID].transform.position))
+            if (item0DropOff.bounds.Contains(inInventoryItems[itemID].transform.position))
             {
-                inventoryItems[itemID].transform.position = usedItemsDropoff;
+                inInventoryItems[itemID].transform.position = usedItemsDropoff;
 
                 Debug.Log("item 0 has been given away");
 
@@ -138,16 +136,16 @@ public class Invintory : MonoBehaviour
             else
             {
                 //not in right spot, return to inventory slot
-                inventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
+                inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
             }
         }
         else if (itemID == 1)
         {
-            inventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
+            inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
         }
         else if (itemID == 2)
         {
-            inventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
+            inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
         }
     }
 }

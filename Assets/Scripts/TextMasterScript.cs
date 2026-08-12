@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class TextMasterScript : MonoBehaviour
@@ -11,17 +12,26 @@ public class TextMasterScript : MonoBehaviour
 
     Coroutine textVisibilityCoroutine;
 
-    void Start()
-    {
-        
-    }
+    private Vector2 mousePos;
 
-    // Update is called once per frame
+    //LargeDoorHitbox
+    public SpriteRenderer largeDoorHitbox;
+
     void Update()
     {
-        
+        mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
     }
 
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed == true)
+        {
+            if (largeDoorHitbox.bounds.Contains(mousePos))
+            {
+                MakeTextVisible("Its Locked");
+            }
+        }
+    }
     public void MakeTextVisible(string newText)
     {
         onScreenText.text = newText;
