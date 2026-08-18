@@ -22,7 +22,6 @@ public class meow : MonoBehaviour
 
     private GameObject spawnedMeow;
 
-    private float moveTime = 1;
 
     // Update is called once per frame
     void Update()
@@ -37,21 +36,11 @@ public class meow : MonoBehaviour
         //checking every meow spawned
         for (int i = 0; i < meowList.Count; i++)
         {
-
-            if (moveTime >= 0.1f)
-            {
-                moveTime -= Time.deltaTime * 0.5f;
-                meowList[i].transform.position += new Vector3(0, 0.1f, 0);
-
-                if (moveTime >= 0)
-                {
-                    moveTime = 1;
-                }
-            }
+            meowList[i].transform.position += new Vector3(0, 0.01f, 0);
 
             //if they are x distance, delete them
             float distance = Vector2.Distance(meowList[i].transform.position, spawnPos.position);
-            if (distance > 3)
+            if (distance > 1.5f)
             {
                 GameObject meow = meowList[i];
                 meowList.Remove(meowList[i]);
@@ -65,7 +54,7 @@ public class meow : MonoBehaviour
     {
         //make a random rotation for the meow prefab
         float r = 0;
-        r = Random.Range(-10, 10);
+        r = Random.Range(-20, 20);
         meowRotation.transform.eulerAngles = new Vector3(0, 0, r);
         
         //spawn meow prefab
