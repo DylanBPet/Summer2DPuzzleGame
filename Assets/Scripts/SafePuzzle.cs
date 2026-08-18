@@ -24,6 +24,14 @@ public class SafePuzzle : MonoBehaviour
 
     public TextMasterScript textScript;
 
+    public GameObject safeClosedZoomedIn;
+    public GameObject safeClosedZoomedOut;
+
+    public GameObject safeOpenZoomedIn;
+    public GameObject safeOpenZoomedOut;
+
+    public GameObject binoculars;
+
 
     // Update is called once per frame
     void Update()
@@ -110,7 +118,7 @@ public class SafePuzzle : MonoBehaviour
         if (context.performed == true)
         {
             SpriteRenderer safeSR = unlockHandle.GetComponent<SpriteRenderer>();
-            if (safeSR.bounds.Contains(mousePos))
+            if (unlockHandle.activeInHierarchy && safeSR.bounds.Contains(mousePos))
             {
                 for (int i = 0; i < currentSafeCombination.Count; i++)
                 {
@@ -122,6 +130,15 @@ public class SafePuzzle : MonoBehaviour
                         return;
                     }
                 }
+
+
+                safeClosedZoomedIn.SetActive(false);
+                safeClosedZoomedOut.SetActive(false);
+
+                safeOpenZoomedIn.SetActive(true);
+                safeOpenZoomedOut.SetActive(true);
+
+                binoculars.SetActive(true);
                 Debug.Log("Answer Correct");
             }
         }

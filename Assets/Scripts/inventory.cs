@@ -31,6 +31,8 @@ public class Invintory : MonoBehaviour
     
     //glitched book
     public SpriteRenderer item3DropOff;
+    public GameObject zoomedOutBook;
+    public GameObject glitchedBookOrigin;
 
     //Binoculars
     public SpriteRenderer item4DropOff;
@@ -101,6 +103,14 @@ public class Invintory : MonoBehaviour
                             isItemInInventory[i] = true;
                             inInventoryItems[i].SetActive(true);
                             inWorldinventoryItems[i].SetActive(false);
+
+                            //the glitched book
+                            if (i == 3)
+                            {
+                                zoomedOutBook.SetActive(false);
+                                glitchedBookOrigin.transform.position = inventorySlots[s].transform.position;
+                            }
+
                             break;
                         }
                     }  
@@ -153,6 +163,7 @@ public class Invintory : MonoBehaviour
                 Debug.Log("item 0 has been given away");
 
                 itemTagInInventory[returnTag] = null;
+
             }
             else
             {
@@ -212,12 +223,14 @@ public class Invintory : MonoBehaviour
                 zoomInScript.allWalls.SetActive(false);
                 glitchedBookZoomedIn.SetActive(true);
                 zoomInScript.SwitchUiCanvas();
+                inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
             }
             else if (item4DropoffWindow.bounds.Contains(inInventoryItems[itemID].transform.position))
             {
                 zoomedInWindow.SetActive(false);
                 zoomedInMan.SetActive(true);
                 zoomInScript.SwitchUiCanvas();
+                inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
             }
             else
             {
