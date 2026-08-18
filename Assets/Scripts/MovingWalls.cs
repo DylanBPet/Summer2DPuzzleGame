@@ -62,7 +62,7 @@ public class MovingWalls : MonoBehaviour
         else
         {
             //start coroutine that move ALL walls right
-            StartCoroutine(DoFadeOut());
+            //StartCoroutine(DoFadeOut());
             yield return movingRightCoroutine = StartCoroutine(WallMovementRight());
             movingRightCoroutine = null;
         }
@@ -77,7 +77,7 @@ public class MovingWalls : MonoBehaviour
         else
         {
             //start coroutine that move ALL walls right
-            StartCoroutine(DoFadeOut());
+            //StartCoroutine(DoFadeOut());
             yield return movingLeftCoroutine = StartCoroutine(WallMovementLeft());
             movingLeftCoroutine = null;
         }
