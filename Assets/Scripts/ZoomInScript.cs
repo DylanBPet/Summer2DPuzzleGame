@@ -35,7 +35,6 @@ public class ZoomInScript : MonoBehaviour
 
     //Looking OutsideWindow
     public SpriteRenderer windowHitbox;
-    public GameObject windowZoomInNoMan;
     public GameObject windowZoomInMan;
     public int randomNumber;
     public CurtainBehavior curtainScript;
@@ -118,15 +117,7 @@ public class ZoomInScript : MonoBehaviour
                     if (curtainScript.curtainSpriteIndex == 0)
                     {
                         allWalls.SetActive(false);
-                        randomNumber = Random.Range(1, 3);
-                        if (randomNumber == 1)
-                        {
-                            windowZoomInNoMan.SetActive(true);
-                        }
-                        else if (randomNumber == 2)
-                        {
-                            windowZoomInMan.SetActive(true);
-                        }
+                        windowZoomInMan.SetActive(true);
                         SwitchUiCanvas();
                     }
                     else

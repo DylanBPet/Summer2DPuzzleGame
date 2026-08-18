@@ -346,11 +346,11 @@ public class BookPuzzle : MonoBehaviour
 
     IEnumerator RevealAnswer()
     {
-        float a = 0;
-        while (a < 1)
+        float t = 0;
+        while (t < 1)
         {
-            a += 0.01f;
-            answerKey.color = new Color(1, 1, 1, a);
+            t += Time.deltaTime * 0.8f;
+            answerKey.color = new Color(1, 1, 1, t);
             //yield return new WaitForSeconds(0.08f);
             yield return null;
         }

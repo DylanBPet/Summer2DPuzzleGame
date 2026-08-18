@@ -35,6 +35,9 @@ public class Invintory : MonoBehaviour
     //Binoculars
     public SpriteRenderer item4DropOff;
     public GameObject glitchedBookZoomedIn;
+    public SpriteRenderer item4DropoffWindow;
+    public GameObject zoomedInMan;
+    public GameObject zoomedInWindow;
 
     public Vector2 usedItemsDropoff;
 
@@ -140,6 +143,7 @@ public class Invintory : MonoBehaviour
     //this is checked when an item is picked up from inventory, then dropped. when dropped, it checks this list for what to do
     private void ItemDropped(int itemID, int returnTag)
     {
+        //Key
         if (itemID == 0)
         {
             if (item0DropOff.bounds.Contains(inInventoryItems[itemID].transform.position))
@@ -156,6 +160,7 @@ public class Invintory : MonoBehaviour
                 inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
             }
         }
+        //Eyeball
         else if (itemID == 1)
         {
             if (item1DropOff.bounds.Contains(inInventoryItems[itemID].transform.position))
@@ -178,29 +183,40 @@ public class Invintory : MonoBehaviour
             }
                
         }
+        //Blacklight
         else if (itemID == 2)
         {
 
             inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
             
         }
+        //Glitched Book
         else if (itemID == 3)
         {
             if (item3DropOff.bounds.Contains(inInventoryItems[itemID].transform.position))
             {
-
+                //remove dropped book and return player to the main scene, activate the "flames"... however you decide to show that
+                itemTagInInventory[itemPickedUpFromInventoryID.Value] = null;
+                inInventoryItems[3].SetActive(false);
             }
             else
             {
                 inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
             }
         }
+        //binoculars 
         else if (itemID == 4)
         {
             if (item4DropOff.bounds.Contains(inInventoryItems[itemID].transform.position))
             {
                 zoomInScript.allWalls.SetActive(false);
                 glitchedBookZoomedIn.SetActive(true);
+                zoomInScript.SwitchUiCanvas();
+            }
+            else if (item4DropoffWindow.bounds.Contains(inInventoryItems[itemID].transform.position))
+            {
+                zoomedInWindow.SetActive(false);
+                zoomedInMan.SetActive(true);
                 zoomInScript.SwitchUiCanvas();
             }
             else

@@ -23,6 +23,18 @@ public class TextMasterScript : MonoBehaviour
     //the main area
     public GameObject mainRoom;
 
+    //window man hitbox
+    public SpriteRenderer windowManHitbox;
+    public GameObject windowZoomedIn;
+
+    //glitched book dropoff hitbox
+    public SpriteRenderer glitchedBookDropoff;
+    public GameObject windowManZoomedIn;
+
+    //marble face lock
+    public SpriteRenderer glassCase;
+    
+
     void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
@@ -44,6 +56,25 @@ public class TextMasterScript : MonoBehaviour
                 {
                     MakeTextVisible("Its too far");
                 }
+
+                if (glassCase.bounds.Contains(mousePos))
+                {
+                    MakeTextVisible("I'll need a key");
+                }
+            }
+            else if (windowZoomedIn.activeInHierarchy)
+            {
+                if (windowManHitbox.bounds.Contains(mousePos))
+                {
+                    MakeTextVisible("Is someone there?");
+                }
+            }
+            else if (windowManZoomedIn.activeInHierarchy)
+            {
+                if (glitchedBookDropoff.bounds.Contains(mousePos))
+                {
+                    MakeTextVisible("What does he want?");
+                }
             }
         }
     }
@@ -62,18 +93,18 @@ public class TextMasterScript : MonoBehaviour
         float a = 0;
         while (a < 1)
         {
-            a += Time.deltaTime * 0.8f;
+            a += Time.deltaTime * 0.9f;
             cloud1.color = new Color(0, 0, 0, a);
             cloud2.color = new Color(0, 0, 0, a);
             onScreenText.color = new Color(1, 1, 1, a);
             yield return null;
         }
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
 
         while (a > 0)
         {
-            a -= Time.deltaTime * 0.8f;
+            a -= Time.deltaTime * 0.9f;
             cloud1.color = new Color(0, 0, 0, a);
             cloud2.color = new Color(0, 0, 0, a);
             onScreenText.color = new Color(1, 1, 1, a);
