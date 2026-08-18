@@ -5707,7 +5707,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &841728583
 Transform:
   m_ObjectHideFlags: 0
@@ -5717,11 +5717,11 @@ Transform:
   m_GameObject: {fileID: 841728582}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.34, y: -3.93, z: 0}
-  m_LocalScale: {x: 0.14200392, y: 0.14200392, z: 0.14200392}
+  m_LocalPosition: {x: -4.1765, y: -2.2, z: 0}
+  m_LocalScale: {x: 0.31177378, y: 0.31177378, z: 0.31177378}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1216781916}
+  m_Father: {fileID: 2078819402}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &841728584
 SpriteRenderer:
@@ -5770,7 +5770,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: -1969172876329986045, guid: 870e09b0736918043876ca931d988a3b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -8773,7 +8773,6 @@ Transform:
   - {fileID: 595307781}
   - {fileID: 1025614406}
   - {fileID: 1899067974}
-  - {fileID: 841728583}
   - {fileID: 774695273}
   - {fileID: 1343747636}
   - {fileID: 624810090}
@@ -11975,7 +11974,6 @@ MonoBehaviour:
   changeWallUiArrows: {fileID: 160307269}
   zoomBackOutUiArrows: {fileID: 943668764}
   safe: {fileID: 1698598124}
-  safeZoomedOut: {fileID: 1698598122}
   safeZoomIn: {fileID: 2019915733}
   jellyFishPainting: {fileID: 1899067975}
   jellyFishPaintingZoomIn: {fileID: 2114138038}
@@ -15099,10 +15097,11 @@ MonoBehaviour:
   zoomedOutSafeIcons: {fileID: 1698598125}
   gosafePuzzle: {fileID: 2019915733}
   textScript: {fileID: 1540825144}
+  safeClosedZoomedIn: {fileID: 743409881}
   safeClosedZoomedOut: {fileID: 1698598122}
+  safeOpenZoomedIn: {fileID: 2078819400}
   safeOpenZoomedOut: {fileID: 624810089}
   binoculars: {fileID: 841728582}
-  zoomInScript: {fileID: 1540825142}
 --- !u!4 &2019915735
 Transform:
   m_ObjectHideFlags: 0
@@ -15423,7 +15422,8 @@ Transform:
   m_LocalPosition: {x: 3.21, y: -0.56, z: 0}
   m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 841728583}
   m_Father: {fileID: 2019915735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2114138038
