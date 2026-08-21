@@ -87,7 +87,7 @@ public class FlowerScript : MonoBehaviour
     {
         if (context.performed == true)
         {
-            if (Mouse.current.leftButton.wasPressedThisFrame)
+            if (Mouse.current.leftButton.wasPressedThisFrame && flowerPuzzleSolved == null || Mouse.current.leftButton.wasPressedThisFrame && flowerPuzzleSolved == false)
             {
                 RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
                 if (hit.collider != null)
@@ -143,11 +143,11 @@ public class FlowerScript : MonoBehaviour
         //N=0 NE=1 E=2 ES=3 S=4 SW=5 W=6 WN=7
         //The player can pluck from L to S, OR S to L
         //Combination (L to S) is SW, WN, NE, N, W, S, ES, E
-        //Combination (S to L) is E, ES, S, W, ES, N, WN, SW
+        //Combination (S to L) is E, ES, S, W, NE, N, WN, SW
         if (flowerOrder.Count == 8)
         {
             if (flowerOrder[0] == 5 && flowerOrder[1] == 7 && flowerOrder[2] == 1 && flowerOrder[3] == 0 && flowerOrder[4] == 6 && flowerOrder[5] == 4 && flowerOrder[6] == 3 && flowerOrder[7] == 2
-               || flowerOrder[0] == 2 && flowerOrder[1] == 3 && flowerOrder[2] == 4 && flowerOrder[3] == 6 && flowerOrder[4] == 0 && flowerOrder[5] == 1 && flowerOrder[6] == 7 && flowerOrder[7] == 5)
+               || flowerOrder[0] == 2 && flowerOrder[1] == 3 && flowerOrder[2] == 4 && flowerOrder[3] == 6 && flowerOrder[4] == 1 && flowerOrder[5] == 0 && flowerOrder[6] == 7 && flowerOrder[7] == 5)
             {
                 Debug.Log("You Solved the Puzzle!");
                 flowerPuzzleSolved = true;

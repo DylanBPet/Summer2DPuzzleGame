@@ -98,10 +98,6 @@ public class ZoomInScript : MonoBehaviour
                         SwitchUiCanvas();
                     }
                 }
-                else
-                {
-                    return;
-                }
                 
                 //To bookshelf zoomed in
                 if (bookshelf.bounds.Contains(mousePos))

@@ -61,6 +61,7 @@ public class TextMasterScript : MonoBehaviour
                 {
                     MakeTextVisible("I'll need a key");
                 }
+
             }
             else if (windowZoomedIn.activeInHierarchy)
             {

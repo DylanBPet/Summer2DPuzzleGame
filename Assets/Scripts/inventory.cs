@@ -46,6 +46,31 @@ public class Invintory : MonoBehaviour
     //zoom in script
     public ZoomInScript zoomInScript;
 
+    //The hitbox to move the inv
+    public SpriteRenderer invMoveHitbox;
+
+    //the whole inventory manager (will move everything involved and in the invintory)
+    public GameObject invManagerGO;
+
+    public GameObject rightUIArrow;
+
+    //the movement for the background of the inv coroutines
+    private Coroutine moveInvOut;
+    private Coroutine moveInvIn;
+
+    //the lerp objects for the inv to move to
+    public GameObject invLerpOutObject;
+    public GameObject invLerpInObject;
+
+    public GameObject arrowLerpOutObject;
+    public GameObject arrowLerpInObject;
+
+    //text master script
+    public TextMasterScript textScript;
+
+    //is the marble head case unlocked
+    private bool caseUnlocked = false;
+ 
     void Start()
     {
 
@@ -76,7 +101,63 @@ public class Invintory : MonoBehaviour
                 }
             }
         }
+        
+        //move inv out
+        if (invMoveHitbox.bounds.Contains(mousePos))
+        {
+            //coroutine larp inv over
+            //move the whole INVENTORY MANAGER
+            if (moveInvOut != null)
+            {
 
+            }
+            else if (moveInvOut == null && moveInvIn == null) 
+            {
+                moveInvOut = StartCoroutine(MoveInvOut());
+            }
+        }
+        //move inv in
+        else
+        {
+            //lerp it back
+            //move the whole INVENTORY MANAGER
+            if (moveInvIn != null || moveInvOut == null)
+            {
+
+            }
+            else if (moveInvIn == null && moveInvOut != null)
+            {
+                moveInvIn = StartCoroutine(MoveInvIn());
+            }
+        }
+
+    }
+
+    IEnumerator MoveInvOut()
+    {
+        float t = 0;
+        while (t < 1)
+        {
+            t += Time.deltaTime * 3f;
+            invManagerGO.transform.position = Vector2.Lerp(invLerpInObject.transform.position, invLerpOutObject.transform.position, t);
+            rightUIArrow.transform.position = Vector2.Lerp(arrowLerpInObject.transform.position, arrowLerpOutObject.transform.position, t);
+            yield return null;
+        }
+        
+    }
+
+    IEnumerator MoveInvIn()
+    {
+        moveInvOut = null;
+        float t = 0;
+        while (t < 1)
+        {
+            t += Time.deltaTime * 3f;
+            invManagerGO.transform.position = Vector2.Lerp(invLerpOutObject.transform.position, invLerpInObject.transform.position, t);
+            rightUIArrow.transform.position = Vector2.Lerp(arrowLerpOutObject.transform.position, arrowLerpInObject.transform.position, t);
+            yield return null;
+        }
+        moveInvIn = null;
     }
 
     //the means of clicking the item from the map, but also when clicking it in inventory
@@ -96,6 +177,22 @@ public class Invintory : MonoBehaviour
                     {
                         if (itemTagInInventory[s] == null)
                         {
+                            //Marble head
+                            if (i == 5)
+                            {
+                                if (caseUnlocked == true)
+                                {
+                                    inInventoryItems[i].transform.position = inventorySlots[s].transform.position;
+                                    itemTagInInventory[s] = i;
+                                    isItemInInventory[i] = true;
+                                    inInventoryItems[i].SetActive(true);
+                                    inWorldinventoryItems[i].SetActive(false);
+                                }
+                                else
+                                {
+                                    return;
+                                }
+                            }
                             Debug.Log("item slot " + s + " has been filled");
                             //StartCoroutine(PickingUpItemAnim());
                             inInventoryItems[i].transform.position = inventorySlots[s].transform.position;
@@ -111,6 +208,11 @@ public class Invintory : MonoBehaviour
                                 glitchedBookOrigin.transform.position = inventorySlots[s].transform.position;
                             }
 
+                            //show that the inv goes past just the few items
+                            if (s >= 5)
+                            {
+                                moveInvOut = StartCoroutine(MoveInvOut());
+                            }
                             break;
                         }
                     }  
@@ -123,6 +225,7 @@ public class Invintory : MonoBehaviour
             }
         }
     }
+
 
     //the "animation" of the item going into inventory
     IEnumerator PickingUpItemAnim(int invSlotNum, int itemNum)
@@ -162,6 +265,10 @@ public class Invintory : MonoBehaviour
 
                 Debug.Log("item 0 has been given away");
 
+                caseUnlocked = true;
+
+                textScript.MakeTextVisible("Unlocked");
+
                 itemTagInInventory[returnTag] = null;
 
             }
@@ -184,7 +291,7 @@ public class Invintory : MonoBehaviour
                 //get rid of the used item
                 inInventoryItems[itemID].transform.position = usedItemsDropoff;
 
-                Debug.Log("item 0 has been given away");
+                Debug.Log("item 1 has been given away");
 
                 itemTagInInventory[returnTag] = null;
             }
