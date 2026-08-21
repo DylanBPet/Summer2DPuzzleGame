@@ -12438,6 +12438,7 @@ MonoBehaviour:
   glitchedBookDropoff: {fileID: 269995667}
   windowManZoomedIn: {fileID: 1322681432}
   glassCase: {fileID: 1657173613}
+  glassCasehitbox: {fileID: 1657173611}
 --- !u!114 &1540825145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13953,6 +13954,8 @@ MonoBehaviour:
   arrowLerpOutObject: {fileID: 1697956292}
   arrowLerpInObject: {fileID: 1692445469}
   textScript: {fileID: 1540825144}
+  headCaseHitbox: {fileID: 1657173611}
+  marbleHeadZoomedIn: {fileID: 1318010377}
 --- !u!4 &1735933013
 Transform:
   m_ObjectHideFlags: 0

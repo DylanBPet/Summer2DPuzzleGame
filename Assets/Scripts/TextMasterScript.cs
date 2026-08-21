@@ -33,6 +33,7 @@ public class TextMasterScript : MonoBehaviour
 
     //marble face lock
     public SpriteRenderer glassCase;
+    public GameObject glassCasehitbox;
     
 
     void Update()
@@ -57,7 +58,7 @@ public class TextMasterScript : MonoBehaviour
                     MakeTextVisible("Its too far");
                 }
 
-                if (glassCase.bounds.Contains(mousePos))
+                if (glassCase.bounds.Contains(mousePos) && glassCasehitbox.activeInHierarchy)
                 {
                     MakeTextVisible("I'll need a key");
                 }

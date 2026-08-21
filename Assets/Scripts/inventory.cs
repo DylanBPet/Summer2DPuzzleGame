@@ -70,7 +70,10 @@ public class Invintory : MonoBehaviour
 
     //is the marble head case unlocked
     private bool caseUnlocked = false;
- 
+    public GameObject headCaseHitbox;
+    public GameObject marbleHeadZoomedIn;
+
+
     void Start()
     {
 
@@ -187,6 +190,8 @@ public class Invintory : MonoBehaviour
                                     isItemInInventory[i] = true;
                                     inInventoryItems[i].SetActive(true);
                                     inWorldinventoryItems[i].SetActive(false);
+
+                                    marbleHeadZoomedIn.SetActive(false);
                                 }
                                 else
                                 {
@@ -266,6 +271,8 @@ public class Invintory : MonoBehaviour
                 Debug.Log("item 0 has been given away");
 
                 caseUnlocked = true;
+
+                headCaseHitbox.SetActive(false);
 
                 textScript.MakeTextVisible("Unlocked");
 
