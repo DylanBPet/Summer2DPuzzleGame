@@ -73,6 +73,12 @@ public class Invintory : MonoBehaviour
     public GameObject headCaseHitbox;
     public GameObject marbleHeadZoomedIn;
 
+    //marble head smashes glass
+    public SpriteRenderer winowBreakHitbox;
+    public GameObject brokenWindow;
+    public GameObject brokenWindowHitbox;
+    public GameObject nonBrokenWindow;
+
     //torn photo dropoff
     public SpriteRenderer tornPhotoDropoff;
     public SpriteRenderer zoomedInTornPhotoDropoff;
@@ -85,6 +91,10 @@ public class Invintory : MonoBehaviour
     public GameObject zoomedInphoto2;
     public GameObject zoomedInphoto3;
 
+    //fire effects script
+    public FireEffects fireEffects;
+    //zoominscript
+    public ZoomInScript zoominscript;
 
     void Start()
     {
@@ -333,8 +343,13 @@ public class Invintory : MonoBehaviour
             if (item3DropOff.bounds.Contains(inInventoryItems[itemID].transform.position))
             {
                 //remove dropped book and return player to the main scene, activate the "flames"... however you decide to show that
-                itemTagInInventory[itemPickedUpFromInventoryID.Value] = null;
-                inInventoryItems[3].SetActive(false);
+                itemTagInInventory[returnTag] = null;
+                inInventoryItems[itemID].SetActive(false);
+
+                
+
+                //fire effects start
+                fireEffects.FireStarted();
             }
             else
             {
@@ -366,7 +381,17 @@ public class Invintory : MonoBehaviour
         //Marble Head
         else if (itemID == 5)
         {
-
+            if (winowBreakHitbox.bounds.Contains(inInventoryItems[itemID].transform.position))
+            {
+                inInventoryItems[itemID].SetActive(false);
+                nonBrokenWindow.SetActive(false);
+                brokenWindow.SetActive(true);
+                brokenWindowHitbox.SetActive(true);
+            }
+            else
+            {
+                inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
+            }
         }
         //Torn Photos
         else if (itemID == 6 || itemID == 7 || itemID == 8)
@@ -378,7 +403,7 @@ public class Invintory : MonoBehaviour
                 {
                     showPhoto1.SetActive(true);
                     itemTagInInventory[returnTag] = null;
-                    inInventoryItems[6].SetActive(false);
+                    inInventoryItems[itemID].SetActive(false);
                     inInventoryItems[itemID].transform.position = usedItemsDropoff;
                     zoomedInphoto1.SetActive(true);
 
@@ -388,7 +413,7 @@ public class Invintory : MonoBehaviour
                 {
                     showPhoto2.SetActive(true);
                     itemTagInInventory[returnTag] = null;
-                    inInventoryItems[7].SetActive(false);
+                    inInventoryItems[itemID].SetActive(false);
                     inInventoryItems[itemID].transform.position = usedItemsDropoff;
                     zoomedInphoto2.SetActive(true);
                 }
@@ -397,7 +422,7 @@ public class Invintory : MonoBehaviour
                 {
                     showPhoto3.SetActive(true);
                     itemTagInInventory[returnTag] = null;
-                    inInventoryItems[8].SetActive(false);
+                    inInventoryItems[itemID].SetActive(false);
                     inInventoryItems[itemID].transform.position = usedItemsDropoff;
                     zoomedInphoto3.SetActive(true);
                 }

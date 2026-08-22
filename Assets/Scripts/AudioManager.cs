@@ -8,9 +8,13 @@ public class AudioManager : MonoBehaviour
 
     //SOUND EFFECTS
     public AudioClip keyboardClicking;
+    public AudioClip gettingOutMatch;
+    public AudioClip lightingMatch;
+    public AudioClip whoosingOfFlame;
 
     //BACKGROUND NOISES
     public AudioClip whiteNoise;
+    public AudioClip lowIntenseFire;
 
     public float volume = 1;
 

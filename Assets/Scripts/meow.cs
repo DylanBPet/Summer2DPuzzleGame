@@ -22,31 +22,43 @@ public class meow : MonoBehaviour
 
     private GameObject spawnedMeow;
 
+    //fire effect script
+    public FireEffects fireScript;
+
+    //key spawn
+    public GameObject keyITEM;
+
 
     // Update is called once per frame
     void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
-        if (bellHitbox.bounds.Contains(mousePos) && Mouse.current.leftButton.wasPressedThisFrame)
+        if (bellHitbox.bounds.Contains(mousePos) && Mouse.current.leftButton.wasPressedThisFrame && fireScript.fireStarted == false)
         {
             BellHit();
         }
-
-        //checking every meow spawned
-        for (int i = 0; i < meowList.Count; i++)
+        else if (bellHitbox.bounds.Contains(mousePos) && Mouse.current.leftButton.wasPressedThisFrame && fireScript.fireStarted == true)
         {
-            meowList[i].transform.position += new Vector3(0, 0.01f, 0);
-
-            //if they are x distance, delete them
-            float distance = Vector2.Distance(meowList[i].transform.position, spawnPos.position);
-            if (distance > 1.5f)
-            {
-                GameObject meow = meowList[i];
-                meowList.Remove(meowList[i]);
-                Destroy(meow);
-            }
+            BellHit();
+            //summon the cat and spawn key
+            keyITEM.SetActive(true);
         }
+
+            //checking every meow spawned
+            for (int i = 0; i < meowList.Count; i++)
+            {
+                meowList[i].transform.position += new Vector3(0, 0.01f, 0);
+
+                //if they are x distance, delete them
+                float distance = Vector2.Distance(meowList[i].transform.position, spawnPos.position);
+                if (distance > 1.5f)
+                {
+                    GameObject meow = meowList[i];
+                    meowList.Remove(meowList[i]);
+                    Destroy(meow);
+                }
+            }
 
     }
 

@@ -38,6 +38,12 @@ public class ZoomInScript : MonoBehaviour
     public GameObject windowZoomInMan;
     public int randomNumber;
     public CurtainBehavior curtainScript;
+    public GameObject curtains;
+    //to end game
+    public SpriteRenderer brokenWindowHitbox;
+    public GameObject brokenWindow;
+    public GameObject gameEnd;
+    public GameObject activeDuringGameplay;
 
     //blackLight Puzzle
     public SpriteRenderer blackLightPuzzleHitbox;
@@ -57,6 +63,9 @@ public class ZoomInScript : MonoBehaviour
 
     //a list of all the zoomed in things so we can turn them all off at the same time
     public List<GameObject> zoomedInEverything;
+
+    //game end script
+    public GameEndScript gameEndScript;
 
     void Start()
     {
@@ -111,7 +120,7 @@ public class ZoomInScript : MonoBehaviour
                 }
 
                 //window
-                if (windowHitbox.bounds.Contains(mousePos))
+                if (windowHitbox.bounds.Contains(mousePos) && curtains.activeInHierarchy)
                 {
                     if (curtainScript.curtainSpriteIndex == 0)
                     {
@@ -123,6 +132,13 @@ public class ZoomInScript : MonoBehaviour
                     {
                         return;
                     }
+                }
+                //end game
+                if (brokenWindowHitbox.bounds.Contains(mousePos) && brokenWindow.activeInHierarchy)
+                {
+                    activeDuringGameplay.SetActive(false);
+                    gameEnd.SetActive(true);
+                    gameEndScript.StartFinalCoroutine();
                 }
 
                 //blachlightPuzzle
