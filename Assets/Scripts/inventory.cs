@@ -322,6 +322,7 @@ public class Invintory : MonoBehaviour
                 cat.SetActive(false);
                 //make blacklight visible
                 inWorldinventoryItems[2].SetActive(true);
+                inWorldinventoryItems[8].SetActive(true);
 
                 //get rid of the used item
                 inInventoryItems[itemID].transform.position = usedItemsDropoff;
