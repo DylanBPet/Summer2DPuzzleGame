@@ -16,6 +16,9 @@ public class MovingWalls : MonoBehaviour
 
     public AnimationCurve changingWallsCurve;
 
+    //audio script
+    public AudioManager audioScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -84,6 +87,9 @@ public class MovingWalls : MonoBehaviour
     }
     IEnumerator WallMovementRight()
     {
+        //audio goes here
+        audioScript.PlaySoundEffect(audioScript.keyboardClicking);
+
         //Lerp ALL walls to the right
         float t = 0;
         while (t <= 1)
@@ -148,6 +154,9 @@ public class MovingWalls : MonoBehaviour
 
     IEnumerator WallMovementLeft()
     {
+        //audio goes here
+        audioScript.PlaySoundEffect(audioScript.keyboardClicking);
+
         //Lerp ALL walls to the LEFT
         float t = 0;
         while (t <= 1)

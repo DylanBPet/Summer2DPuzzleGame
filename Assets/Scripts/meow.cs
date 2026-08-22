@@ -28,6 +28,9 @@ public class meow : MonoBehaviour
     //key spawn
     public GameObject keyITEM;
 
+    //audioscript
+    public AudioManager audioScript;
+
 
     // Update is called once per frame
     void Update()
@@ -64,6 +67,7 @@ public class meow : MonoBehaviour
 
     public void BellHit()
     {
+        audioScript.PlaySoundEffect(audioScript.meow);
         //make a random rotation for the meow prefab
         float r = 0;
         r = Random.Range(-20, 20);

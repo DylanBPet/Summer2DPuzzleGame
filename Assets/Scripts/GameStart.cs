@@ -26,6 +26,7 @@ public class GameStart : MonoBehaviour
         yield return new WaitForSeconds(4f);
         audioScript.PlaySoundEffect(audioScript.keyboardClicking);
         audioScript.StopBackgroundMusic();
+        audioScript.PlayBackgroundNoise(audioScript.backgroundMusic);
         mainScene.SetActive(true);
         gameStartScreen.SetActive(false);
         yield return null;

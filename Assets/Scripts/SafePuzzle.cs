@@ -32,6 +32,9 @@ public class SafePuzzle : MonoBehaviour
 
     public GameObject binoculars;
 
+    //audio script
+    public AudioManager audioScript;
+
 
     // Update is called once per frame
     void Update()
@@ -51,6 +54,7 @@ public class SafePuzzle : MonoBehaviour
 
                     if (SafeTouchableIcons.bounds.Contains(mousePos))
                     {
+                        audioScript.PlaySoundEffect(audioScript.safeClicking);
                         if (i <= 3) //Its the top row
                         {
                             SwitchingTopIcons(i, SafeTouchableIcons);
@@ -117,9 +121,11 @@ public class SafePuzzle : MonoBehaviour
     {
         if (context.performed == true)
         {
+            
             SpriteRenderer safeSR = unlockHandle.GetComponent<SpriteRenderer>();
             if (unlockHandle.activeInHierarchy && safeSR.bounds.Contains(mousePos))
             {
+                audioScript.PlaySoundEffect(audioScript.safeUnlock);
                 for (int i = 0; i < currentSafeCombination.Count; i++)
                 {
                     if (currentSafeCombination[i] != safeAnswerCombination[i])

@@ -12,9 +12,15 @@ public class GameEndScript : MonoBehaviour
     public GameObject buttonTwo;
     public GameObject buttonThree;
 
+    public AudioManager audioScript;
+
     public void StartFinalCoroutine()
     {
+        audioScript.StopBackgroundMusic();
+
         StartCoroutine(ShowParagraphOne());
+
+        audioScript.PlayBackgroundNoise(audioScript.whiteNoise);
     }
 
     IEnumerator ShowParagraphOne()
@@ -27,6 +33,8 @@ public class GameEndScript : MonoBehaviour
 
     public void StartParagraphTwo()
     {
+        audioScript.PlaySoundEffect(audioScript.keyboardClicking);
+        paragraphOne.color = Color.clear;
         buttonOne.SetActive(false);
         StartCoroutine(ShowParagraphTwo());
     }
@@ -41,6 +49,8 @@ public class GameEndScript : MonoBehaviour
 
     public void StartParagraphThree()
     {
+        audioScript.PlaySoundEffect(audioScript.keyboardClicking);
+        paragraphTwo.color = Color.clear;
         buttonTwo.SetActive(false);
         StartCoroutine(ShowParagraphThree());
     }
@@ -60,13 +70,14 @@ public class GameEndScript : MonoBehaviour
         {
             t += Time.deltaTime * 0.33f;
             paragraph.color = new Color(1, 1, 1, t);
-        }
-        yield return null;
+            yield return null;
+        }  
     }
 
     public void ThrownNewspaper()
     {
+        audioScript.PlaySoundEffect(audioScript.keyboardClicking);
         buttonThree.SetActive(false);
-        //make the newspaper spin
+       //the newspaper gets thrown onto the screen above the words of paragraph 3
     }
 }

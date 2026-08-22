@@ -95,6 +95,8 @@ public class Invintory : MonoBehaviour
     public FireEffects fireEffects;
     //zoominscript
     public ZoomInScript zoominscript;
+    //audioScript
+    public AudioManager audioScript;
 
     void Start()
     {
@@ -228,6 +230,9 @@ public class Invintory : MonoBehaviour
                             inInventoryItems[i].SetActive(true);
                             inWorldinventoryItems[i].SetActive(false);
 
+                            //AUDIO GO HERE
+                            audioScript.PlaySoundEffect(audioScript.itemPickup);
+
                             //the glitched book
                             if (i == 3)
                             {
@@ -240,6 +245,7 @@ public class Invintory : MonoBehaviour
                             {
                                 moveInvOut = StartCoroutine(MoveInvOut());
                             }
+                            
                             break;
                         }
                     }  

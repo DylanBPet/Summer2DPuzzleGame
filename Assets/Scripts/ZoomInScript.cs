@@ -67,6 +67,8 @@ public class ZoomInScript : MonoBehaviour
     //game end script
     public GameEndScript gameEndScript;
 
+    public GameObject settingsButton;
+
     void Start()
     {
         
@@ -180,12 +182,14 @@ public class ZoomInScript : MonoBehaviour
     {
         changeWallUiArrows.SetActive(false);
         zoomBackOutUiArrows.SetActive(true);
+        settingsButton.SetActive(false);
     }
 
     public void zoomOutUiCanvasButton()
     {
         changeWallUiArrows.SetActive(true);
         zoomBackOutUiArrows.SetActive(false);
+        settingsButton.SetActive(true);
         for (int i = 0; i < zoomedInEverything.Count; i++)
         {
             zoomedInEverything[i].SetActive(false);
