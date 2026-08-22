@@ -116,12 +116,12 @@ TextureImporter:
       name: SkullPaintingFinal_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 2048
-        height: 2732
+        x: 194
+        y: 153
+        width: 1679
+        height: 2429
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ba2461c478200a049bc82c12be4bd1bd
     internalID: 0
     vertices: []
     indices: 

@@ -51,6 +51,9 @@ public class ZoomInScript : MonoBehaviour
     public SpriteRenderer compassSR;
     public GameObject compassZoomedIn;
 
+    //skull painting
+    public SpriteRenderer skullPaintingSR;
+    public GameObject skullPaintingZoomedIn;
 
     //a list of all the zoomed in things so we can turn them all off at the same time
     public List<GameObject> zoomedInEverything;
@@ -143,6 +146,14 @@ public class ZoomInScript : MonoBehaviour
                 {
                     allWalls.SetActive(false);
                     compassZoomedIn.SetActive(true);
+                    SwitchUiCanvas();
+                }
+
+                //skull painting
+                if (skullPaintingSR.bounds.Contains(mousePos))
+                {
+                    allWalls.SetActive(false);
+                    skullPaintingZoomedIn.SetActive(true);
                     SwitchUiCanvas();
                 }
             }

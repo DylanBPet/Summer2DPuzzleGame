@@ -73,6 +73,18 @@ public class Invintory : MonoBehaviour
     public GameObject headCaseHitbox;
     public GameObject marbleHeadZoomedIn;
 
+    //torn photo dropoff
+    public SpriteRenderer tornPhotoDropoff;
+    public SpriteRenderer zoomedInTornPhotoDropoff;
+    public GameObject zoomeInTornPhoto;
+    public GameObject showPhoto1;
+    public GameObject showPhoto2;
+    public GameObject showPhoto3;
+    //tornPhoto zoomed in changes
+    public GameObject zoomedInphoto1;
+    public GameObject zoomedInphoto2;
+    public GameObject zoomedInphoto3;
+
 
     void Start()
     {
@@ -345,6 +357,50 @@ public class Invintory : MonoBehaviour
                 zoomedInMan.SetActive(true);
                 zoomInScript.SwitchUiCanvas();
                 inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
+            }
+            else
+            {
+                inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
+            }
+        }
+        //Marble Head
+        else if (itemID == 5)
+        {
+
+        }
+        //Torn Photos
+        else if (itemID == 6 || itemID == 7 || itemID == 8)
+        {
+            if (tornPhotoDropoff.bounds.Contains(inInventoryItems[itemID].transform.position) || zoomedInTornPhotoDropoff.bounds.Contains(inInventoryItems[itemID].transform.position) && zoomeInTornPhoto.activeInHierarchy)
+            {
+                //photo 1
+                if (itemID == 6)
+                {
+                    showPhoto1.SetActive(true);
+                    itemTagInInventory[returnTag] = null;
+                    inInventoryItems[6].SetActive(false);
+                    inInventoryItems[itemID].transform.position = usedItemsDropoff;
+                    zoomedInphoto1.SetActive(true);
+
+                }
+                //photo 2
+                else if (itemID == 7)
+                {
+                    showPhoto2.SetActive(true);
+                    itemTagInInventory[returnTag] = null;
+                    inInventoryItems[7].SetActive(false);
+                    inInventoryItems[itemID].transform.position = usedItemsDropoff;
+                    zoomedInphoto2.SetActive(true);
+                }
+                //photo 3
+                else if (itemID == 8)
+                {
+                    showPhoto3.SetActive(true);
+                    itemTagInInventory[returnTag] = null;
+                    inInventoryItems[8].SetActive(false);
+                    inInventoryItems[itemID].transform.position = usedItemsDropoff;
+                    zoomedInphoto3.SetActive(true);
+                }
             }
             else
             {
