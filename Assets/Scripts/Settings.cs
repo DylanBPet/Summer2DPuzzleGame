@@ -29,7 +29,26 @@ public class Settings : MonoBehaviour
     //things settings can change
     public AudioManager audioScript;
 
+    private float displayedSfxVolumeNumber;
+    private float displayedMusicVolumeNumber;
 
+
+    void Update()
+    {
+        //change the decimal number to a whole number
+        //do a mathf so it stays to 3 decimal places
+
+        displayedSfxVolumeNumber = audioScript.sfxVolume * 100;
+        displayedMusicVolumeNumber = audioScript.musicVolume * 100;
+
+        //display that number
+        sfxVolumeNumber.text = displayedSfxVolumeNumber.ToString();
+        musicVolumeNumber.text = displayedMusicVolumeNumber.ToString();
+
+        //allow the slider to change the numbers
+        audioScript.sfxVolume = sfxSlider.value;
+        audioScript.musicVolume = musicSlider.value;
+    }
 
     public void OpenSettings()
     {
