@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 126c990bb90726e47b2ef043c1c81641
+guid: 165b421d14344f44caf5cd4c49d71178
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8110194389465142859
-    second: Eye PNG_0
+      213: 2156634376771009901
+    second: FlowerSolvedFrame1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Eye PNG_0
+      name: FlowerSolvedFrame1_0
       rect:
         serializedVersion: 2
-        x: 34
-        y: 75
-        width: 315
-        height: 217
+        x: 462
+        y: 108
+        width: 1004
+        height: 1810
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5b960942c2dc27f80800000000000000
-      internalID: -8110194389465142859
+      spriteID: d6df4d11a87eded10800000000000000
+      internalID: 2156634376771009901
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Eye PNG_0: -8110194389465142859
+      FlowerSolvedFrame1_0: 2156634376771009901
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

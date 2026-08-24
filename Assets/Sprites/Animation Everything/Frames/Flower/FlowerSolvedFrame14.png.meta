@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6e8e785b1d1c47d4d93b516358490400
+guid: 3531b3557a4e76649b0f18f2dbe228db
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2868969276424915721
-    second: BookshelfHint_0
+      213: 1494255638184284673
+    second: FlowerSolvedFrame14_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BookshelfHint_0
+      name: FlowerSolvedFrame14_0
       rect:
         serializedVersion: 2
-        x: 771
-        y: 645
-        width: 1166
-        height: 931
+        x: 462
+        y: 108
+        width: 1004
+        height: 1849
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 90b01d04b50a0d720800000000000000
-      internalID: 2868969276424915721
+      spriteID: 10259950699acb410800000000000000
+      internalID: 1494255638184284673
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BookshelfHint_0: 2868969276424915721
+      FlowerSolvedFrame14_0: 1494255638184284673
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

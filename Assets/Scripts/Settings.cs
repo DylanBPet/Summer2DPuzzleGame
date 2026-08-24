@@ -36,14 +36,13 @@ public class Settings : MonoBehaviour
     void Update()
     {
         //change the decimal number to a whole number
-        //do a mathf so it stays to 3 decimal places
-
         displayedSfxVolumeNumber = audioScript.sfxVolume * 100;
         displayedMusicVolumeNumber = audioScript.musicVolume * 100;
 
-        //display that number
-        sfxVolumeNumber.text = displayedSfxVolumeNumber.ToString();
-        musicVolumeNumber.text = displayedMusicVolumeNumber.ToString();
+       
+        //display that number                       F0 gets rid of decimals
+        sfxVolumeNumber.text = displayedSfxVolumeNumber.ToString("F0");
+        musicVolumeNumber.text = displayedMusicVolumeNumber.ToString("F0");
 
         //allow the slider to change the numbers
         audioScript.sfxVolume = sfxSlider.value;

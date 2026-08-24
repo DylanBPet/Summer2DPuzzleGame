@@ -30,7 +30,7 @@ public class Invintory : MonoBehaviour
     //glitched book
     public SpriteRenderer item3DropOff;
     public GameObject zoomedOutBook;
-    public GameObject glitchedBookOrigin;
+   
 
     //Binoculars
     public SpriteRenderer item4DropOff;
@@ -95,6 +95,9 @@ public class Invintory : MonoBehaviour
     public ZoomInScript zoominscript;
     //audioScript
     public AudioManager audioScript;
+
+    //flower puzzle script
+    public FlowerScript flowerScript;
 
     void Start()
     {
@@ -231,11 +234,19 @@ public class Invintory : MonoBehaviour
                             //AUDIO GO HERE
                             audioScript.PlaySoundEffect(audioScript.itemPickup);
 
+                            //Eyeball
+                            if (i == 1)
+                            {
+                                //do the reverse animation
+                                flowerScript.flowerAnimator.SetBool("EyePickedUp", true);
+
+                            }
+
                             //the glitched book
                             if (i == 3)
                             {
                                 zoomedOutBook.SetActive(false);
-                                glitchedBookOrigin.transform.position = inventorySlots[s].transform.position;
+                                
                             }
 
                             //show that the inv goes past just the few items

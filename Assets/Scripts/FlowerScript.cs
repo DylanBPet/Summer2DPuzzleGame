@@ -27,9 +27,21 @@ public class FlowerScript : MonoBehaviour
     Coroutine flowerCenterPulse;
     public AnimationCurve flowerPulseCurve;
 
-    //when solved, change the zoomed flower sprite to the eye
-    public GameObject eyeITEM;
-    public SpriteRenderer zoomedOutFlower;
+    //animator
+    public Animator flowerAnimator;
+    //flower for puzzle
+    public GameObject puzzleFlower;
+    //flower for animation
+    public GameObject animationFlower;
+
+    //zoom out ui
+    public GameObject zoomOutUI;
+
+    //SR for the zoomed out Flower
+    public SpriteRenderer zoomedOutFlowerSR;
+    //hand Sprite
+    public Sprite handSprite;
+
 
     void Start()
     {
@@ -149,9 +161,24 @@ public class FlowerScript : MonoBehaviour
             if (flowerOrder[0] == 5 && flowerOrder[1] == 7 && flowerOrder[2] == 1 && flowerOrder[3] == 0 && flowerOrder[4] == 6 && flowerOrder[5] == 4 && flowerOrder[6] == 3 && flowerOrder[7] == 2
                || flowerOrder[0] == 2 && flowerOrder[1] == 3 && flowerOrder[2] == 4 && flowerOrder[3] == 6 && flowerOrder[4] == 1 && flowerOrder[5] == 0 && flowerOrder[6] == 7 && flowerOrder[7] == 5)
             {
+
+                //hide zoom out ui for a second
+                zoomOutUI.SetActive(false);
+
                 Debug.Log("You Solved the Puzzle!");
                 flowerPuzzleSolved = true;
-                eyeITEM.SetActive(true);
+
+                //turn off flower
+                puzzleFlower.SetActive(false);
+                //turn on flower animation
+                animationFlower.SetActive(true);
+
+                //animation controller & start animation
+                flowerAnimator.SetBool("PuzzleSolved", true);
+
+                //change the zoomed out flower sprite to the hand sprite
+                zoomedOutFlowerSR.sprite = handSprite;
+
             }
             else
             {
