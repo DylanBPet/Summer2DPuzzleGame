@@ -30,6 +30,7 @@ public class Invintory : MonoBehaviour
     //glitched book
     public SpriteRenderer item3DropOff;
     public GameObject zoomedOutBook;
+    public GameObject glitchedBookDropOffGO;
    
 
     //Binoculars
@@ -38,6 +39,7 @@ public class Invintory : MonoBehaviour
     public SpriteRenderer item4DropoffWindow;
     public GameObject zoomedInMan;
     public GameObject zoomedInWindow;
+    public GameObject outsideMANItemDropoff;
 
     public Vector2 usedItemsDropoff;
 
@@ -63,13 +65,16 @@ public class Invintory : MonoBehaviour
     public GameObject arrowLerpOutObject;
     public GameObject arrowLerpInObject;
 
-    //text master script
-    public TextMasterScript textScript;
+    
 
     //is the marble head case unlocked
     private bool caseUnlocked = false;
     public GameObject headCaseHitbox;
     public GameObject marbleHeadZoomedIn;
+
+    //main door
+    public SpriteRenderer mainDoorHitbox;
+    public GameObject mainDoorHitboxGO;
 
     //marble head smashes glass
     public SpriteRenderer winowBreakHitbox;
@@ -95,6 +100,8 @@ public class Invintory : MonoBehaviour
     public ZoomInScript zoominscript;
     //audioScript
     public AudioManager audioScript;
+    //text master script
+    public TextMasterScript textScript;
 
     //flower puzzle script
     public FlowerScript flowerScript;
@@ -301,6 +308,7 @@ public class Invintory : MonoBehaviour
         //Key
         if (itemID == 0)
         {
+            //marble head case
             if (item0DropOff.bounds.Contains(inInventoryItems[itemID].transform.position))
             {
                 inInventoryItems[itemID].transform.position = usedItemsDropoff;
@@ -315,6 +323,12 @@ public class Invintory : MonoBehaviour
 
                 itemTagInInventory[returnTag] = null;
 
+            }
+            //the main door
+            else if(mainDoorHitbox.bounds.Contains(inInventoryItems[itemID].transform.position) && mainDoorHitboxGO.activeInHierarchy)
+            {
+                textScript.MakeTextVisible("Still Locked");
+                inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
             }
             else
             {
@@ -356,7 +370,7 @@ public class Invintory : MonoBehaviour
         //Glitched Book
         else if (itemID == 3)
         {
-            if (item3DropOff.bounds.Contains(inInventoryItems[itemID].transform.position))
+            if (item3DropOff.bounds.Contains(inInventoryItems[itemID].transform.position) && glitchedBookDropOffGO.activeInHierarchy)
             {
                 //remove dropped book and return player to the main scene, activate the "flames"... however you decide to show that
                 itemTagInInventory[returnTag] = null;
@@ -382,10 +396,11 @@ public class Invintory : MonoBehaviour
                 zoomInScript.SwitchUiCanvas();
                 inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
             }
-            else if (item4DropoffWindow.bounds.Contains(inInventoryItems[itemID].transform.position))
+            else if (item4DropoffWindow.bounds.Contains(inInventoryItems[itemID].transform.position) && outsideMANItemDropoff.activeInHierarchy)
             {
                 zoomedInWindow.SetActive(false);
                 zoomedInMan.SetActive(true);
+                glitchedBookDropOffGO.SetActive(true);
                 zoomInScript.SwitchUiCanvas();
                 inInventoryItems[itemID].transform.position = inventorySlots[returnTag].transform.position;
             }
@@ -401,6 +416,11 @@ public class Invintory : MonoBehaviour
             {
                 inInventoryItems[itemID].SetActive(false);
                 nonBrokenWindow.SetActive(false);
+                
+                //turn off hitbox for looking outside
+                zoomInScript.windowNoManHitboxGO.SetActive(false);
+
+
                 brokenWindow.SetActive(true);
                 brokenWindowHitbox.SetActive(true);
             }

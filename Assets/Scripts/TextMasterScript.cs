@@ -34,7 +34,11 @@ public class TextMasterScript : MonoBehaviour
     //marble face lock
     public SpriteRenderer glassCase;
     public GameObject glassCasehitbox;
-    
+
+    //outside window No man
+    public GameObject windowNoMan;
+    public SpriteRenderer windowNoManHitbox;
+
 
     void Update()
     {
@@ -76,6 +80,13 @@ public class TextMasterScript : MonoBehaviour
                 if (glitchedBookDropoff.bounds.Contains(mousePos))
                 {
                     MakeTextVisible("What does he want?");
+                }
+            }
+            else if (windowNoMan.activeInHierarchy)
+            {
+                if (windowNoManHitbox.bounds.Contains(mousePos))
+                {
+                    MakeTextVisible("He's gone");
                 }
             }
         }

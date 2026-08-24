@@ -22,6 +22,11 @@ public class FireEffects : MonoBehaviour
     public ZoomInScript zoominscript;
     public AudioManager audioScript;
 
+    //window hitboxes
+    public GameObject toOutsideWindowNOMANHitbox;
+    public GameObject toOutsideWindowMANHitbox;
+    public GameObject outsideMANItemDropoff;
+
     void Start()
     {
         
@@ -63,6 +68,15 @@ public class FireEffects : MonoBehaviour
 
         pulsing = false;
         fireStarted = true;
+
+        //get rid of the hitbox that takes you to outside with the man
+        toOutsideWindowMANHitbox.SetActive(false);
+
+        //activate hitbox that takes you outside with NO MAN
+        toOutsideWindowNOMANHitbox.SetActive(true);
+
+        //turn off hitbox for zoomed in MAN item dropoff
+        outsideMANItemDropoff.SetActive(false);
     }
 
     IEnumerator PulsingFire()

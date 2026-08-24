@@ -35,6 +35,7 @@ public class ZoomInScript : MonoBehaviour
 
     //Looking OutsideWindow
     public SpriteRenderer windowHitbox;
+    public GameObject windowHitboxGO;
     public GameObject windowZoomInMan;
     public int randomNumber;
     public CurtainBehavior curtainScript;
@@ -44,6 +45,10 @@ public class ZoomInScript : MonoBehaviour
     public GameObject brokenWindow;
     public GameObject gameEnd;
     public GameObject activeDuringGameplay;
+    //Looking Outside Winodw During Fire
+    public SpriteRenderer windowNoManHitbox;
+    public GameObject windowNoManHitboxGO;
+    public GameObject windowNoMan;
 
     //blackLight Puzzle
     public SpriteRenderer blackLightPuzzleHitbox;
@@ -122,12 +127,25 @@ public class ZoomInScript : MonoBehaviour
                 }
 
                 //window
-                if (windowHitbox.bounds.Contains(mousePos) && curtains.activeInHierarchy)
+                if (windowHitbox.bounds.Contains(mousePos) && windowHitboxGO.activeInHierarchy)
                 {
-                    if (curtainScript.curtainSpriteIndex == 0)
+                    if (curtainScript.curtainSpriteIndex == 0 || curtainScript.curtainSpriteIndex == 1)
                     {
                         allWalls.SetActive(false);
                         windowZoomInMan.SetActive(true);
+                        SwitchUiCanvas();
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                if (windowNoManHitbox.bounds.Contains(mousePos) && windowNoManHitboxGO.activeInHierarchy)
+                {
+                    if (curtainScript.curtainSpriteIndex == 0 || curtainScript.curtainSpriteIndex == 1)
+                    {
+                        allWalls.SetActive(false);
+                        windowNoMan.SetActive(true);
                         SwitchUiCanvas();
                     }
                     else
