@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,10 +35,9 @@ public class Settings : MonoBehaviour
     private float displayedMusicVolumeNumber;
 
     ///////////////////////////////////////////////Hints
-    public GameObject flowerSettingHint;
-    public GameObject bookSettingHint;
-    public GameObject jellyfishSettingHint;
-    public GameObject catSettingHint;
+    public GameObject hintSettings;
+    public GameObject hintSettingsButton;
+    public List<GameObject> settingHintsTurnOn;
 
 
     void Update()
@@ -68,6 +69,7 @@ public class Settings : MonoBehaviour
         //change buttons
         backButton.SetActive(true);
         settingsButton.SetActive(false);
+        hintSettingsButton.SetActive(false);
 
     }
 
@@ -81,9 +83,13 @@ public class Settings : MonoBehaviour
         //close settigns
         fullSettings.SetActive(false);
 
+        //also close hint settings
+        hintSettings.SetActive(false);
+
         //change buttons
         backButton.SetActive(false);
         settingsButton.SetActive(true);
+        hintSettingsButton.SetActive(true);
     }
 
     public void ToCredits()
@@ -96,7 +102,9 @@ public class Settings : MonoBehaviour
     public void BackToSettings()
     {
         backButton.SetActive(true);
+
         creditScreen.SetActive(false);
+
         fullSettings.SetActive(true);
     }
 
@@ -113,6 +121,30 @@ public class Settings : MonoBehaviour
     public void OpenJDSherbertITCH()
     {
         Application.OpenURL("https://jdsherbert.itch.io/");
+    }
+
+    public void ToHintSettings()
+    {
+        //cant interact with map
+        moveWallUi.SetActive(false);
+
+        playerGO.SetActive(false);
+
+        //open hint settigns
+        hintSettings.SetActive(true);
+
+        //change buttons
+        backButton.SetActive(true);
+        settingsButton.SetActive(false);
+        hintSettingsButton.SetActive(false);
+    }
+
+    public void TurnOnOrOffHints()
+    {
+        for (int i = 0; i < settingHintsTurnOn.Count; i++)
+        {
+            settingHintsTurnOn[i].SetActive(!settingHintsTurnOn[i].activeSelf);
+        }
     }
 
 }

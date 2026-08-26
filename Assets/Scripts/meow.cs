@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class meow : MonoBehaviour
 {
     public SpriteRenderer bellHitbox;
+    public GameObject bell;
 
     private Vector2 mousePos;
 
@@ -31,22 +32,31 @@ public class meow : MonoBehaviour
     //audioscript
     public AudioManager audioScript;
 
+    private bool keyIsSpawned = false;
+
 
     // Update is called once per frame
     void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
-        if (bellHitbox.bounds.Contains(mousePos) && Mouse.current.leftButton.wasPressedThisFrame && fireScript.fireStarted == false)
+        if (bell.activeInHierarchy)
         {
-            BellHit();
+            if (bellHitbox.bounds.Contains(mousePos) && Mouse.current.leftButton.wasPressedThisFrame && fireScript.fireStarted == false)
+            {
+                BellHit();
+            }
+            else if (bellHitbox.bounds.Contains(mousePos) && Mouse.current.leftButton.wasPressedThisFrame && fireScript.fireStarted == true && keyIsSpawned == false)
+            {
+                //key has been shown
+                keyIsSpawned = true;
+
+                BellHit();
+                //summon the cat and spawn key
+                keyITEM.SetActive(true);
+            }
         }
-        else if (bellHitbox.bounds.Contains(mousePos) && Mouse.current.leftButton.wasPressedThisFrame && fireScript.fireStarted == true)
-        {
-            BellHit();
-            //summon the cat and spawn key
-            keyITEM.SetActive(true);
-        }
+        
 
             //checking every meow spawned
             for (int i = 0; i < meowList.Count; i++)

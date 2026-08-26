@@ -39,6 +39,10 @@ public class TextMasterScript : MonoBehaviour
     public GameObject windowNoMan;
     public SpriteRenderer windowNoManHitbox;
 
+    //cat hint
+    public GameObject catSettingHint;
+    public SpriteRenderer catSettingHintSR;
+
 
     void Update()
     {
@@ -67,6 +71,14 @@ public class TextMasterScript : MonoBehaviour
                     MakeTextVisible("I'll need a key");
                 }
 
+                if (catSettingHint.activeInHierarchy)
+                {
+                    if (catSettingHintSR.bounds.Contains(mousePos))
+                    {
+                        MakeTextVisible("She wants something to play with...");
+                    }
+                }
+
             }
             else if (windowZoomedIn.activeInHierarchy)
             {
@@ -89,6 +101,7 @@ public class TextMasterScript : MonoBehaviour
                     MakeTextVisible("He's gone");
                 }
             }
+            
         }
     }
     public void MakeTextVisible(string newText)

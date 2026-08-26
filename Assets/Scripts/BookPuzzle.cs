@@ -31,6 +31,8 @@ public class BookPuzzle : MonoBehaviour
     //stuff to do with the answer
     public bool bookPuzzleIsSolved = false;
     public SpriteRenderer answerKey;
+    public AudioManager audioScript;
+
 
     void Start()
     {
@@ -334,6 +336,7 @@ public class BookPuzzle : MonoBehaviour
         //start a coroutine that makes the safe combination visible
         if (bookPuzzleIsSolved == false)
         {
+            audioScript.PlaySoundEffect(audioScript.churchBell);
             StartCoroutine(RevealAnswer());
             bookPuzzleIsSolved = true;
             Debug.Log("Bookshelf puzzle SOLVED");

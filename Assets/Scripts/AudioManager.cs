@@ -17,7 +17,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip tapingWood;
     public AudioClip thud;
     public AudioClip meow;
-
+    public AudioClip churchBell;
 
 
     //BACKGROUND NOISES

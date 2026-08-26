@@ -205,6 +205,8 @@ public class Invintory : MonoBehaviour
                                 //do the reverse animation
                                 flowerScript.flowerAnimator.SetBool("EyePickedUp", true);
 
+                                
+
                             }
 
                             //the glitched book
@@ -214,7 +216,7 @@ public class Invintory : MonoBehaviour
                                 
                             }
 
-                           
+                          
                             
                             break;
                         }
