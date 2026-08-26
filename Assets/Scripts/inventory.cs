@@ -46,17 +46,15 @@ public class Invintory : MonoBehaviour
     //zoom in script
     public ZoomInScript zoomInScript;
 
-    //The hitbox to move the inv
-    public SpriteRenderer invMoveHitbox;
+   
+    
 
     //the whole inventory manager (will move everything involved and in the invintory)
     public GameObject invManagerGO;
 
     public GameObject rightUIArrow;
 
-    //the movement for the background of the inv coroutines
-    private Coroutine moveInvOut;
-    private Coroutine moveInvIn;
+ 
 
     //the lerp objects for the inv to move to
     public GameObject invLerpOutObject;
@@ -136,35 +134,7 @@ public class Invintory : MonoBehaviour
                 }
             }
         }
-        
-        //move inv out
-        if (invMoveHitbox.bounds.Contains(mousePos))
-        {
-            //coroutine larp inv over
-            //move the whole INVENTORY MANAGER
-            if (moveInvOut != null)
-            {
-
-            }
-            else if (moveInvOut == null && moveInvIn == null) 
-            {
-                moveInvOut = StartCoroutine(MoveInvOut());
-            }
-        }
-        //move inv in
-        else
-        {
-            //lerp it back
-            //move the whole INVENTORY MANAGER
-            if (moveInvIn != null || moveInvOut == null)
-            {
-
-            }
-            else if (moveInvIn == null && moveInvOut != null)
-            {
-                moveInvIn = StartCoroutine(MoveInvIn());
-            }
-        }
+       
 
     }
 
@@ -181,19 +151,7 @@ public class Invintory : MonoBehaviour
         
     }
 
-    IEnumerator MoveInvIn()
-    {
-        moveInvOut = null;
-        float t = 0;
-        while (t < 1)
-        {
-            t += Time.deltaTime * 3f;
-            invManagerGO.transform.position = Vector2.Lerp(invLerpOutObject.transform.position, invLerpInObject.transform.position, t);
-            rightUIArrow.transform.position = Vector2.Lerp(arrowLerpOutObject.transform.position, arrowLerpInObject.transform.position, t);
-            yield return null;
-        }
-        moveInvIn = null;
-    }
+
 
     //the means of clicking the item from the map, but also when clicking it in inventory
     public void ItemCollectied(InputAction.CallbackContext context)
@@ -256,11 +214,7 @@ public class Invintory : MonoBehaviour
                                 
                             }
 
-                            //show that the inv goes past just the few items
-                            if (s >= 5)
-                            {
-                                moveInvOut = StartCoroutine(MoveInvOut());
-                            }
+                           
                             
                             break;
                         }

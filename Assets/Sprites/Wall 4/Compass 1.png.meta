@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7863da8e7884d8842849a3fb3ebf03a3
+guid: d02b43de1d9df8e43a3a8ea5a8793a4c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5941269532982766630
-    second: Compass_0
+      213: 638167982224283706
+    second: Compass 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Compass_0
+      name: Compass 1_0
       rect:
         serializedVersion: 2
         x: 382
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ad316b386de5c8da0800000000000000
-      internalID: -5941269532982766630
+      spriteID: a38918f066a3bd800800000000000000
+      internalID: 638167982224283706
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Compass_0: -5941269532982766630
+      Compass 1_0: 638167982224283706
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

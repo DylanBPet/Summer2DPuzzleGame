@@ -32,6 +32,12 @@ public class Settings : MonoBehaviour
     private float displayedSfxVolumeNumber;
     private float displayedMusicVolumeNumber;
 
+    ///////////////////////////////////////////////Hints
+    public GameObject flowerSettingHint;
+    public GameObject bookSettingHint;
+    public GameObject jellyfishSettingHint;
+    public GameObject catSettingHint;
+
 
     void Update()
     {
