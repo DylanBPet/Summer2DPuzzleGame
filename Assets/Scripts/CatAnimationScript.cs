@@ -40,12 +40,13 @@ public class CatAnimationScript : MonoBehaviour
         catWithEyeball.SetActive(true);
 
         //start animation
+        catWithEyeballAnimator.SetBool("CatGivenEye", true);
     }
 
     public void CatIsOffscreen()
     {
         catWithEyeball.SetActive(false);
-
+        catWithEyeballAnimator.SetBool("CatGivenEye", false);
     }
 
 

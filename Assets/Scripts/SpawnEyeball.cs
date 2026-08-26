@@ -6,6 +6,8 @@ public class SpawnEyeball : MonoBehaviour
 
     public FlowerScript flowerPuzzleScript;
 
+    public AudioManager audioScript;
+
     public void ShowEyeball()
     {
         eyeball.SetActive(true);
@@ -27,5 +29,10 @@ public class SpawnEyeball : MonoBehaviour
     {
         //turn back on zoom out ui
         flowerPuzzleScript.zoomOutUI.SetActive(true);
+    }
+
+    public void PlayPuzzleSolvedNoise()
+    {
+        audioScript.PlaySoundEffect(audioScript.churchBell);
     }
 }

@@ -123,6 +123,11 @@ public class Settings : MonoBehaviour
         Application.OpenURL("https://jdsherbert.itch.io/");
     }
 
+    public void OpenVixLinkedin()
+    {
+        Application.OpenURL("https://www.linkedin.com/in/vix-sak-1707a2252/");
+    }
+    
     public void ToHintSettings()
     {
         //cant interact with map

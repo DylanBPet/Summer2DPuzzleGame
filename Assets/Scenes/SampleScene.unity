@@ -1076,7 +1076,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &63769568
 Transform:
   m_ObjectHideFlags: 0
@@ -6925,7 +6925,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &421562715
 Transform:
   m_ObjectHideFlags: 0
@@ -6935,7 +6935,7 @@ Transform:
   m_GameObject: {fileID: 421562714}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.65, y: -2.86, z: 0}
+  m_LocalPosition: {x: -2.04, y: -2.401, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -21418,7 +21418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1232918837
 Transform:
   m_ObjectHideFlags: 0
@@ -21530,6 +21530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpawnEyeball
   eyeball: {fileID: 1716938485}
   flowerPuzzleScript: {fileID: 718264897}
+  audioScript: {fileID: 1568170841}
 --- !u!1 &1244878622
 GameObject:
   m_ObjectHideFlags: 0
@@ -28159,7 +28160,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1565884381}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1066911125}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: OpenVixLinkedin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1565884381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31539,7 +31552,7 @@ MonoBehaviour:
   audioScript: {fileID: 1568170841}
   textScript: {fileID: 1540825144}
   flowerScript: {fileID: 718264897}
-  catAnimationScript: {fileID: 0}
+  catAnimationScript: {fileID: 421562716}
 --- !u!4 &1735933013
 Transform:
   m_ObjectHideFlags: 0
@@ -35866,7 +35879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2008243575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37579,7 +37592,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2124593515
 Transform:
   m_ObjectHideFlags: 0
