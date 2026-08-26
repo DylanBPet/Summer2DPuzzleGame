@@ -104,6 +104,9 @@ public class Invintory : MonoBehaviour
     //flower puzzle script
     public FlowerScript flowerScript;
 
+    //cat animation Script
+    public CatAnimationScript catAnimationScript;
+
     void Start()
     {
 
@@ -297,8 +300,9 @@ public class Invintory : MonoBehaviour
         {
             if (item1DropOff.bounds.Contains(inInventoryItems[itemID].transform.position))
             {
-                //the cat will run away
-                cat.SetActive(false);
+                //use cat animation to start the animation and set current cat to false
+                catAnimationScript.CatGivenEyeball();
+
                 //make blacklight visible
                 inWorldinventoryItems[2].SetActive(true);
                 inWorldinventoryItems[8].SetActive(true);

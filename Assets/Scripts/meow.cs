@@ -34,6 +34,8 @@ public class meow : MonoBehaviour
 
     private bool keyIsSpawned = false;
 
+    //cat animation script
+    public CatAnimationScript catAnimScript;
 
     // Update is called once per frame
     void Update()
@@ -52,8 +54,11 @@ public class meow : MonoBehaviour
                 keyIsSpawned = true;
 
                 BellHit();
+
                 //summon the cat and spawn key
-                keyITEM.SetActive(true);
+                //use CAT ANIMATOR
+                catAnimScript.SpawnCatWithkey();
+
             }
         }
         

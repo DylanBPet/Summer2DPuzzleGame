@@ -54,8 +54,6 @@ AnimationClip:
       value: {fileID: -769113269537927446, guid: 55b0e552139729e41b6507af0031a79d, type: 3}
     - time: 2.6666667
       value: {fileID: 9145799165452910037, guid: 6cb8e0b19a1289448b4e7d10d6167a37, type: 3}
-    - time: 2.8333333
-      value: {fileID: -5173940297197934190, guid: 87ce271dc5d8bde46b28f76349e71b97, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -95,13 +93,12 @@ AnimationClip:
     - {fileID: 2481117538246894783, guid: a9190134270014d4d84725dcd461f86f, type: 3}
     - {fileID: -769113269537927446, guid: 55b0e552139729e41b6507af0031a79d, type: 3}
     - {fileID: 9145799165452910037, guid: 6cb8e0b19a1289448b4e7d10d6167a37, type: 3}
-    - {fileID: -5173940297197934190, guid: 87ce271dc5d8bde46b28f76349e71b97, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 3
+    m_StopTime: 2.8333335
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -120,4 +117,18 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0
+    functionName: KeyCatIdle
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 2.6666667
+    functionName: SpawnKey
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
