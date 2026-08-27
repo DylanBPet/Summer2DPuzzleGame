@@ -13,10 +13,26 @@
 #if DEVELOPMENT_PLAYER
   <script src="<<<TemplateData/profiler.js>>>"></script>
 #endif
+
+<style>
+#unity-container:fullscreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+}
+</style>
+
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width={{{ WIDTH }}} height={{{ HEIGHT }}} tabindex="-1" style="width: 100%; height: 100%; max-width: 1920px; max-height: 1200px; aspect-ratio: 1920 / 1200;"></canvas>
+      <canvas id="unity-canvas" width={{{ WIDTH }}} height={{{ HEIGHT }}} tabindex="-1" style="width: 100%; height: 100%; object-fit: contain;"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -38,7 +54,13 @@
 
       document.addEventListener("fullscreenchange", function () {
           canvas.focus();
+          setTimeout(function () {
+              window.dispatchEvent(new Event('resize'));
+          }, 100);
       });
+
+     
+
       // Shows a temporary message banner/ribbon for a few seconds, or
       // a permanent error message on top of the canvas if type=='error'.
       // If type=='warning', a yellow highlight color is used.
@@ -133,8 +155,8 @@
 
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-        canvas.style.width = "{{{ WIDTH }}}px";
-        canvas.style.height = "{{{ HEIGHT }}}px";
+        //canvas.style.width = "{{{ WIDTH }}}px";
+        //canvas.style.height = "{{{ HEIGHT }}}px"; 
       }
 
 #if BACKGROUND_FILENAME
@@ -154,9 +176,13 @@
                   unityDiagnostics.openDiagnosticsDiv(unityInstance.GetMetricsInfo);
                 };
 #endif
+
                 document.querySelector("#unity-fullscreen-button").onclick = () => {
                   unityInstance.SetFullscreen(1);
                 };
+                 document.querySelector("#unity-fullscreen-button").onclick = function () {
+          document.querySelector("#unity-container").requestFullscreen();
+      };
 
 #if DEVELOPMENT_PLAYER
                 var profile = unityProfiler.createButton(unityInstance);

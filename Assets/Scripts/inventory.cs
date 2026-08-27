@@ -161,6 +161,8 @@ public class Invintory : MonoBehaviour
     {
         if (context.performed == true)
         {
+            Debug.Log($"Screen: {Screen.width}x{Screen.height}, MousePos:{Mouse.current.position.ReadValue()}, WorldMousePos: {mousePos}");
+
             for (int i = 0; i < inWorldinventoryItems.Count; i++)
             {
                SpriteRenderer InvItemSr = inWorldinventoryItems[i].GetComponent<SpriteRenderer>();
